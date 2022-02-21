@@ -8,3 +8,5 @@ class ErrorResponse extends Error {
         this.statusCode = statusCode;
     }
 }
+
+export default ErrorResponse;

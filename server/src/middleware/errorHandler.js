@@ -1,4 +1,5 @@
 import config from "../config/config.js";
+import ErrorResponse from "../utilis/ErrorResponse.js";
 
 /**
  * @name errorHandler
