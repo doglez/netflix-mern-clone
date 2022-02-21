@@ -11,6 +11,7 @@ import hpp from "hpp";
 import cors from "cors";
 import errorHandler from "./middleware/errorHandler.js";
 import connectDB from "./database/connectDB.js";
+import routes from "./routes/routes.js";
 
 colors.enable();
 
@@ -55,6 +56,7 @@ app.use(hpp());
 app.use(cors());
 
 // Route
+app.use("/api/v1", routes);
 
 // Error handler
 app.use(errorHandler);
