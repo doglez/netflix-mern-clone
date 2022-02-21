@@ -8,13 +8,13 @@
 const advancedResults = (model, populate) => async (req, res, next) => {
     let query;
 
-    //Copy the req.query that come in the request
+    // Copy the req.query that come in the request
     const reqQuery = { ...req.query };
 
     // Fields to exclude
     const removeFields = ["select", "sort", "page", "limit"];
 
-    // Loop over removeFields and delte then from reqQuery
+    // Loop over removeFields and delete then from reqQuery
     removeFields.forEach((params) => delete reqQuery[params]);
 
     // Create query string
@@ -37,7 +37,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
 
     // Sort
     if (req.query.sort) {
-        const sortBy = req.query.sort(",").join(" ");
+        const sortBy = req.query.sort.split(",").join(" ");
         query.sort(sortBy);
     } else {
         query = query.sort("createdAt");
@@ -59,7 +59,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
     // Executing query
     const result = await query;
 
-    // Pagintaion result
+    // Pagination result
     const pagination = {};
 
     if (endIndex < total) {
@@ -76,12 +76,14 @@ const advancedResults = (model, populate) => async (req, res, next) => {
         };
     }
 
-    return (res.advancedResults = {
+    res.advancedResults = {
         success: true,
         count: result.length,
         pagination,
         data: result,
-    });
+    };
+
+    next();
 };
 
 export default advancedResults;
