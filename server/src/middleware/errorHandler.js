@@ -1,5 +1,14 @@
 import config from "../config/config.js";
 
+/**
+ * @name errorHandler
+ * @description Handle the errors from the Data Base data
+ * @param {*} err
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns Response JSon
+ */
 const errorHandler = (err, req, res, next) => {
     let error = { ...err };
     error.message = err.message;
@@ -33,7 +42,7 @@ const errorHandler = (err, req, res, next) => {
             break;
     }
 
-    res.status(error.statusCode || 500).json({
+    return res.status(error.statusCode || 500).json({
         success: false,
         error: error.message || "Server Error",
     });
