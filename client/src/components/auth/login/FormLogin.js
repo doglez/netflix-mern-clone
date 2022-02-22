@@ -78,8 +78,17 @@ const FormLogin = (props) => {
                             >
                                 Submit
                             </button>
-
-                            <Link to="/register">Sign up now.</Link>
+                            <div>
+                                <span className="text-muted">
+                                    New to Netflix?{" "}
+                                </span>
+                                <Link
+                                    to="/register"
+                                    className="text-decoration-none text-white"
+                                >
+                                    Sign up now.
+                                </Link>
+                            </div>
                         </div>
                     </Form>
                 </div>
