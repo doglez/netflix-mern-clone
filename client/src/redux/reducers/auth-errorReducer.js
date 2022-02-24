@@ -20,6 +20,12 @@ const authErrorReducer = (state = initialState, { type, payload }) => {
         case ActionTypes.LOGOUT_SUCCESS:
             return state;
 
+        case ActionTypes.REGISTER_FAIL:
+            return { ...payload };
+
+        case ActionTypes.REGISTER_SUCCESS:
+            return state;
+
         default:
             return state;
     }

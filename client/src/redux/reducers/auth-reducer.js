@@ -47,6 +47,15 @@ const authReducer = (state = authState, { type, payload }) => {
             localStorage.removeItem("auth");
             return initialState;
 
+        case ActionTypes.REGISTER_SUCCESS:
+            localStorage.setItem("auth", JSON.stringify(payload));
+            axios.defaults.headers.common["Authorization"] = payload.type;
+            return payload;
+
+        case ActionTypes.REGISTER_FAIL:
+            localStorage.removeItem("auth");
+            return initialState;
+
         default:
             return state;
     }
