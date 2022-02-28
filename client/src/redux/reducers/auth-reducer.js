@@ -15,9 +15,8 @@ const getInitialState = () => {
         const { token } = authObject;
         const decode = jwtDecode(token);
         const expireToken = decode.exp;
-
         if (new Date(expireToken * 1000) > new Date()) {
-            axios.defaults.headers.common["Authorization"] = token;
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             return authObject;
         }
         return initialState;
@@ -32,7 +31,9 @@ const authReducer = (state = authState, { type, payload }) => {
     switch (type) {
         case ActionTypes.LOGIN_SUCCESS:
             localStorage.setItem("auth", JSON.stringify(payload));
-            axios.defaults.headers.common["Authorization"] = payload.type;
+            axios.defaults.headers.post[
+                "Authorization"
+            ] = `Bearer ${payload.token}`;
             return payload;
 
         case ActionTypes.LOGIN_FAIL:
@@ -41,10 +42,12 @@ const authReducer = (state = authState, { type, payload }) => {
 
         case ActionTypes.LOGOUT_SUCCESS:
             localStorage.removeItem("auth");
+            window.location.reload();
             return initialState;
 
         case ActionTypes.LOGOUT_FAIL:
             localStorage.removeItem("auth");
+            window.location.reload();
             return initialState;
 
         case ActionTypes.REGISTER_SUCCESS:

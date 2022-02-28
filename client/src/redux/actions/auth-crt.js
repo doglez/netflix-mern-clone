@@ -19,7 +19,7 @@ export const LoginCrt = (loginData) => (dispatch) =>
             });
         });
 
-export const LogoutCrt = (history) => (dispatch) =>
+export const LogoutCrt = () => (dispatch) =>
     axios
         .get(`${config.AUTH_URL}/logout`)
         .then((r) => {
@@ -33,7 +33,6 @@ export const LogoutCrt = (history) => (dispatch) =>
                 type: ActionTypes.LOGOUT_FAIL,
                 payload: e.response.data,
             });
-            history.push("/");
         });
 
 export const RegisterCrt = (registerData) => (dispatch) =>

@@ -1,7 +1,7 @@
 import Login from "./components/auth/login/Login.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./components/auth/register/Register.js";
-import Home from "./components/home/Home.js";
+import Home from "./components/logged/home/Home.js";
 
 function App() {
     return (
@@ -12,6 +12,7 @@ function App() {
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
                         <Route index element={<Home />} />
+                        <Route path="*" element={<Home />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
