@@ -1,5 +1,20 @@
-import { amber, grey, lightBlue, red } from "@mui/material/colors";
-import { createTheme } from "@mui/material/styles";
+import { amber, blueGrey, grey, lightBlue, red } from "@mui/material/colors";
+import {
+    createTheme,
+    PaletteColor,
+    PaletteColorOptions,
+} from "@mui/material/styles";
+
+declare module "@mui/material/styles" {
+    interface Palette {
+        bgImgAuth: PaletteColor;
+    }
+
+    // allow configuration using `createTheme`
+    interface PaletteOptions {
+        bgImgAuth?: PaletteColorOptions;
+    }
+}
 
 export const themeDark = createTheme({
     palette: {
@@ -13,6 +28,9 @@ export const themeDark = createTheme({
             main: red["700"],
             light: red["A200"],
             dark: red["900"],
+        },
+        bgImgAuth: {
+            main: "black",
         },
     },
 });
