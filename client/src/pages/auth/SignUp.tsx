@@ -1,4 +1,5 @@
 import React from "react";
+import NavBarAuth from "../../components/NavBarAuth";
 import {
     BgSignUPBox,
     BgSignUPBoxTransparent,
@@ -6,11 +7,10 @@ import {
 
 const SignUp = () => {
     return (
-        <div>
-            <BgSignUPBox>
-                <BgSignUPBoxTransparent></BgSignUPBoxTransparent>
-            </BgSignUPBox>
-        </div>
+        <BgSignUPBox>
+            <BgSignUPBoxTransparent />
+            <NavBarAuth />
+        </BgSignUPBox>
     );
 };
 

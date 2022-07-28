@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import NavBarButtons from "./NavBarButtons";
 
@@ -7,17 +7,19 @@ const NavBarAuth = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar color="transparent" enableColorOnDark>
-                <Toolbar>
-                    <Typography
-                        variant="h4"
-                        sx={{ flexGrow: 1 }}
-                        color="secondary"
-                    >
-                        Netflix
-                    </Typography>
-                    {pathSignUp === "/signup" ? <NavBarButtons /> : null}
-                </Toolbar>
+            <AppBar color="transparent">
+                <Container maxWidth="xl">
+                    <Toolbar>
+                        <Typography
+                            variant="h3"
+                            sx={{ flexGrow: 1, fontWeight: "bold" }}
+                            color="secondary"
+                        >
+                            Netflix
+                        </Typography>
+                        {pathSignUp === "/signup" ? <NavBarButtons /> : null}
+                    </Toolbar>
+                </Container>
             </AppBar>
         </Box>
     );
