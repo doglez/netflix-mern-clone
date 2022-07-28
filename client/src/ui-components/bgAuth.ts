@@ -9,9 +9,10 @@ export const BgSignUPBox = styled(Box)`
 `;
 
 export const BgSignUPBoxTransparent = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.bgImgAuth.main,
+    background:
+        "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(33,33,33,1) 50%, rgba(33,33,33,1) 50%, rgba(0,0,0,1) 100%)",
     backgroundRepeat: "no-repeat",
-    opacity: "0.6",
+    opacity: 0.8,
     width: "100%",
     height: "100vh",
 }));

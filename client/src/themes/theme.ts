@@ -1,4 +1,4 @@
-import { amber, blueGrey, grey, lightBlue, red } from "@mui/material/colors";
+import { amber, grey, lightBlue, red } from "@mui/material/colors";
 import {
     createTheme,
     PaletteColor,
