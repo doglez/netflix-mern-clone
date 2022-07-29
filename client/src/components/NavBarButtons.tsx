@@ -11,10 +11,13 @@ import React, { useState } from "react";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Link as RouterLink } from "react-router-dom";
 
-const NavMenuItemSpan = styled("span")`
-    display: flex;
-    align-items: center;
-`;
+const NavMenuItemSpan = styled("span")(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+        fontSize: "0.875rem",
+    },
+}));
 
 const NavBarButtons = () => {
     const [lenguage, setLenguage] = useState("en");
