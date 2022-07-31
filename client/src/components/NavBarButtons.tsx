@@ -1,51 +1,12 @@
-import {
-    Box,
-    Button,
-    FormControl,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    styled,
-} from "@mui/material";
-import React, { useState } from "react";
-import LanguageIcon from "@mui/icons-material/Language";
+import { Box, Button } from "@mui/material";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-
-const NavMenuItemSpan = styled("span")(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    [theme.breakpoints.down("md")]: {
-        fontSize: "0.875rem",
-    },
-}));
+import LenguageSelect from "./LenguageSelect";
 
 const NavBarButtons = () => {
-    const [lenguage, setLenguage] = useState("en");
-    const handleChange = (e: SelectChangeEvent) => {
-        setLenguage(e.target.value);
-    };
-
     return (
         <Box>
-            <FormControl sx={{ minWidth: 120 }} size="small">
-                <Select
-                    value={lenguage}
-                    onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ "aria-label": "Without label" }}
-                >
-                    <MenuItem value="en">
-                        <NavMenuItemSpan>
-                            <LanguageIcon /> English
-                        </NavMenuItemSpan>
-                    </MenuItem>
-                    <MenuItem value="es">
-                        <NavMenuItemSpan>
-                            <LanguageIcon /> Español
-                        </NavMenuItemSpan>
-                    </MenuItem>
-                </Select>
-            </FormControl>
+            <LenguageSelect />
             <Button
                 color="secondary"
                 variant="contained"

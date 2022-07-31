@@ -26,7 +26,7 @@ const NavBarAuth = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar color="transparent">
+            <AppBar color="transparent" elevation={0}>
                 <Box
                     sx={{
                         width: "100%",
