@@ -53,6 +53,7 @@ const NavBarButtons = () => {
                     marginLeft: "10px",
                     paddingTop: "9px",
                     paddingBottom: "9px",
+                    textTransform: "none",
                 }}
                 component={RouterLink}
                 to="/signin"
