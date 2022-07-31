@@ -5,10 +5,10 @@ import {
     BgSignUPBox,
     BgSignUPBoxTransparent,
 } from "../../ui-components/bgAuth";
+import SignUpForm from "./SignUpForm";
 
 const TitleBox = styled(Box)(({ theme }) => ({
     width: "45%",
-
     [theme.breakpoints.down("md")]: {
         width: "60%",
     },
@@ -35,7 +35,7 @@ const SignUp = () => {
                     position: "absolute",
                     top: "50%",
                     left: "50%",
-                    transform: "translate(-50%, -50%)",
+                    transform: "translate(-50%, -35%)",
                     width: "100%",
                 }}
             >
@@ -69,6 +69,7 @@ const SignUp = () => {
                         Ready to watch? Enter your email to create or restart
                         your membership.
                     </Typography>
+                    <SignUpForm />
                 </Box>
             </Box>
         </>
