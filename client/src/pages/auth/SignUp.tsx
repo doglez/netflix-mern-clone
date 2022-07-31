@@ -1,11 +1,12 @@
 import { Box, styled, Typography } from "@mui/material";
 import React from "react";
-import NavBarAuth from "../../components/NavBarAuth";
+import NavBarAuth from "./auth-components/NavBarAuth";
 import {
     BgSignUPBox,
     BgSignUPBoxTransparent,
 } from "../../ui-components/bgAuth";
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "./auth-components/SignUpForm";
+import FooterAuth from "./auth-components/FooterAuth";
 
 const TitleBox = styled(Box)(({ theme }) => ({
     width: "45%",
@@ -72,6 +73,7 @@ const SignUp = () => {
                     <SignUpForm />
                 </Box>
             </Box>
+            <FooterAuth />
         </>
     );
 };

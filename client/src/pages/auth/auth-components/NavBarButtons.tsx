@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import LenguageSelect from "./LenguageSelect";
+import LenguageSelect from "../../../components/LenguageSelect";
 
 const NavBarButtons = () => {
     return (

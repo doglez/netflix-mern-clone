@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarAuth from "../../components/NavBarAuth";
+import NavBarAuth from "./auth-components/NavBarAuth";
 import {
     BgSignUPBox,
     BgSignUPBoxTransparent,

@@ -1,7 +1,7 @@
 import { Box, Button, styled, TextField, ThemeProvider } from "@mui/material";
 import { ChevronRightSharp } from "@mui/icons-material";
 import React, { useState } from "react";
-import { themeLight } from "../../themes/theme";
+import { themeLight } from "../../../themes/theme";
 
 const BoxForm = styled(Box)(({ theme }) => ({
     display: "flex",
