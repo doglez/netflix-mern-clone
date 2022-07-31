@@ -1,6 +1,14 @@
-import { AppBar, Box, styled, Toolbar, Typography } from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Button,
+    styled,
+    Toolbar,
+    Typography,
+} from "@mui/material";
 import React from "react";
-import NavBarButtons from "./NavBarButtons";
+import LenguageSelect from "../../../components/LenguageSelect";
+import { Link as RouterLink } from "react-router-dom";
 
 const LogoText = styled(Typography)(({ theme }) => ({
     flexGrow: 1,
@@ -38,7 +46,25 @@ const NavBarAuth = () => {
                         <LogoText variant="h3" color="secondary">
                             Netflix
                         </LogoText>
-                        {pathSignUp === "/signup" ? <NavBarButtons /> : null}
+                        {pathSignUp === "/signup" ? (
+                            <>
+                                <LenguageSelect />
+                                <Button
+                                    color="secondary"
+                                    variant="contained"
+                                    sx={{
+                                        marginLeft: "10px",
+                                        paddingTop: "9px",
+                                        paddingBottom: "9px",
+                                        textTransform: "none",
+                                    }}
+                                    component={RouterLink}
+                                    to="/signin"
+                                >
+                                    Sing In
+                                </Button>
+                            </>
+                        ) : null}
                     </ContainerToolbar>
                 </Box>
             </AppBar>
