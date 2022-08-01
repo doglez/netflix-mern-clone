@@ -33,42 +33,40 @@ const NavBarAuth = () => {
     const pathSignUp: string = window.location.pathname;
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar color="transparent" elevation={0}>
-                <Box
-                    sx={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                    }}
-                >
-                    <ContainerToolbar>
-                        <LogoText variant="h3" color="secondary">
-                            Netflix
-                        </LogoText>
-                        {pathSignUp === "/signup" ? (
-                            <>
-                                <LenguageSelect />
-                                <Button
-                                    color="secondary"
-                                    variant="contained"
-                                    sx={{
-                                        marginLeft: "10px",
-                                        paddingTop: "9px",
-                                        paddingBottom: "9px",
-                                        textTransform: "none",
-                                    }}
-                                    component={RouterLink}
-                                    to="/signin"
-                                >
-                                    Sing In
-                                </Button>
-                            </>
-                        ) : null}
-                    </ContainerToolbar>
-                </Box>
-            </AppBar>
-        </Box>
+        <AppBar color="transparent" elevation={0} position="absolute">
+            <Box
+                sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+            >
+                <ContainerToolbar>
+                    <LogoText variant="h3" color="secondary">
+                        Doglez
+                    </LogoText>
+                    {pathSignUp === "/signup" ? (
+                        <>
+                            <LenguageSelect />
+                            <Button
+                                color="secondary"
+                                variant="contained"
+                                sx={{
+                                    marginLeft: "10px",
+                                    paddingTop: "9px",
+                                    paddingBottom: "9px",
+                                    textTransform: "none",
+                                }}
+                                component={RouterLink}
+                                to="/signin"
+                            >
+                                Sing In
+                            </Button>
+                        </>
+                    ) : null}
+                </ContainerToolbar>
+            </Box>
+        </AppBar>
     );
 };
 
