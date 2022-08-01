@@ -7,7 +7,7 @@ import {
     Typography,
 } from "@mui/material";
 import React from "react";
-import LenguageSelect from "../../../components/LenguageSelect";
+import LenguageSelect from "../../components/LenguageSelect";
 import { Link as RouterLink } from "react-router-dom";
 
 const LogoText = styled(Typography)(({ theme }) => ({
@@ -45,7 +45,7 @@ const NavBarAuth = () => {
                     <LogoText variant="h3" color="secondary">
                         Dogflix
                     </LogoText>
-                    {pathSignUp === "/signup" ? (
+                    {pathSignUp === "/" ? (
                         <>
                             <LenguageSelect />
                             <Button

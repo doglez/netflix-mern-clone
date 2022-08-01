@@ -1,7 +1,8 @@
 import React from "react";
-import SignUp from "./pages/auth/SignUp";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import SignIn from "./pages/auth/SignIn";
+import Auth from "./pages/auth/Auth";
+import SignIn from "./pages/auth/auth-components/SignIn";
+import SignUp from "./pages/auth/auth-components/SignUp";
 import Home from "./pages/home/Home";
 
 function App() {
@@ -12,12 +13,8 @@ function App() {
             <Routes>
                 {!token ? (
                     <Route>
-                        <Route
-                            path="/"
-                            element={<Navigate to="/signup" replace />}
-                        />
-                        <Route path="/">
-                            <Route path="signup" element={<SignUp />} />
+                        <Route path="/" element={<Auth />}>
+                            <Route index element={<SignUp />} />
                             <Route path="signin" element={<SignIn />} />
                         </Route>
                         <Route path="*" element={<Navigate to="/" replace />} />

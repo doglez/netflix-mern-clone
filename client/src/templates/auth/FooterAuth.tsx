@@ -8,8 +8,8 @@ import {
     Typography,
 } from "@mui/material";
 import React from "react";
-import LenguageSelect from "../../../components/LenguageSelect";
-import { FooterTexts } from "../../../i18n/en";
+import LenguageSelect from "../../components/LenguageSelect";
+import { FooterTexts } from "../../i18n/en";
 
 const ContentBox = styled(Box)(({ theme }) => ({
     width: "75%",
