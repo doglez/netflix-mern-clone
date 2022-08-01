@@ -1,3 +1,3 @@
-# Doglez-Netflix
+# DOGFLIX
 
-Doglez-Netflix is a Netflix clone developed in TypeScript with the MERN stack
+Dogflix is a Netflix clone developed in TypeScript with the MERN stack
