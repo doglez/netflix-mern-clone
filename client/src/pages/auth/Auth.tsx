@@ -1,5 +1,4 @@
 import React from "react";
-import NavBarAuth from "../../templates/auth/NavBarAuth";
 import {
     BgSignUPBox,
     BgSignUPBoxTransparent,
@@ -13,7 +12,6 @@ const Auth = () => {
             <BgSignUPBox>
                 <BgSignUPBoxTransparent />
             </BgSignUPBox>
-            <NavBarAuth />
             <Outlet />
             <FooterAuth />
         </>

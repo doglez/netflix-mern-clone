@@ -1,5 +1,6 @@
 import { Box, styled, Typography } from "@mui/material";
 import React from "react";
+import NavBarAuth from "../../../templates/auth/NavBarAuth";
 import SignUpForm from "./SignUpForm";
 
 const TitleBox = styled(Box)(({ theme }) => ({
@@ -20,48 +21,51 @@ const TitleFont = styled(Typography)(({ theme }) => ({
 
 const SignUp = () => {
     return (
-        <Box
-            sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -35%)",
-                width: "100%",
-            }}
-        >
+        <>
+            <NavBarAuth />
             <Box
                 sx={{
-                    color: "white",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -35%)",
+                    width: "100%",
                 }}
             >
-                <TitleBox>
-                    <TitleFont
-                        variant="h3"
-                        sx={{
-                            textAlign: "center",
-                            fontWeight: "bold",
-                            paddingBottom: "5px",
-                        }}
-                    >
-                        Unlimited movies, TV shows, and more.
-                    </TitleFont>
-                    <Typography
-                        variant="h5"
-                        sx={{ textAlign: "center", paddingBottom: "20px" }}
-                    >
-                        Watch anywhere. Cancel anytime.
+                <Box
+                    sx={{
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <TitleBox>
+                        <TitleFont
+                            variant="h3"
+                            sx={{
+                                textAlign: "center",
+                                fontWeight: "bold",
+                                paddingBottom: "5px",
+                            }}
+                        >
+                            Unlimited movies, TV shows, and more.
+                        </TitleFont>
+                        <Typography
+                            variant="h5"
+                            sx={{ textAlign: "center", paddingBottom: "20px" }}
+                        >
+                            Watch anywhere. Cancel anytime.
+                        </Typography>
+                    </TitleBox>
+                    <Typography variant="h6" sx={{ textAlign: "center" }}>
+                        Ready to watch? Enter your email to create or restart
+                        your membership.
                     </Typography>
-                </TitleBox>
-                <Typography variant="h6" sx={{ textAlign: "center" }}>
-                    Ready to watch? Enter your email to create or restart your
-                    membership.
-                </Typography>
-                <SignUpForm />
+                    <SignUpForm />
+                </Box>
             </Box>
-        </Box>
+        </>
     );
 };
 

@@ -1,17 +1,10 @@
 import React from "react";
 import NavBarAuth from "../../../templates/auth/NavBarAuth";
-import {
-    BgSignUPBox,
-    BgSignUPBoxTransparent,
-} from "../../../ui-components/bgAuth";
 
 const SignIn = () => {
     return (
         <>
-            <BgSignUPBox>
-                <BgSignUPBoxTransparent />
-                <NavBarAuth />
-            </BgSignUPBox>
+            <NavBarAuth />
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas
             repellendus non, voluptatibus consequatur nisi maiores adipisci,
             sint placeat odio modi quod facilis at! Possimus vitae id debitis
