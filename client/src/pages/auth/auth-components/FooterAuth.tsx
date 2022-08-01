@@ -65,7 +65,7 @@ const FooterAuth = () => {
                         color="primary.light"
                         sx={{ paddingTop: "20px" }}
                     >
-                        Doglez Netflix
+                        DOGFLIX
                     </Typography>
                 </ContentBox>
             </Box>

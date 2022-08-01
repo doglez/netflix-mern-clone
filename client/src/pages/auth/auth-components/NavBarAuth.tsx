@@ -43,7 +43,7 @@ const NavBarAuth = () => {
             >
                 <ContainerToolbar>
                     <LogoText variant="h3" color="secondary">
-                        Doglez
+                        Dogflix
                     </LogoText>
                     {pathSignUp === "/signup" ? (
                         <>

@@ -20,10 +20,7 @@ function App() {
                             <Route path="signup" element={<SignUp />} />
                             <Route path="signin" element={<SignIn />} />
                         </Route>
-                        <Route
-                            path="*"
-                            element={<Navigate to="/signup" replace />}
-                        />
+                        <Route path="*" element={<Navigate to="/" replace />} />
                     </Route>
                 ) : (
                     <Route>
