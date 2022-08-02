@@ -2,8 +2,11 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
     Box,
     Button,
+    Checkbox,
     FilledInput,
     FormControl,
+    FormControlLabel,
+    FormGroup,
     IconButton,
     InputAdornment,
     InputLabel,
@@ -118,13 +121,38 @@ const SignIn = () => {
                             sx={{
                                 display: "flex",
                                 justifyContent: "space-between",
-                                paddingTop: "5px",
+                                paddingTop: "2px",
                             }}
                         >
-                            <Typography color="primary.light" variant="body2">
-                                Remember me
-                            </Typography>
-                            <Typography color="primary.light" variant="body2">
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                }}
+                            >
+                                <Checkbox
+                                    id="remember"
+                                    defaultChecked
+                                    size="small"
+                                    sx={{ padding: "0" }}
+                                />
+                                <label
+                                    style={{
+                                        color: "#616161",
+                                        fontSize: "0.875rem",
+                                        paddingTop: "7px",
+                                    }}
+                                    htmlFor="remember"
+                                >
+                                    Remember me
+                                </label>
+                            </Box>
+                            <Typography
+                                color="primary.light"
+                                variant="body2"
+                                sx={{
+                                    paddingTop: "5px",
+                                }}
+                            >
                                 Need help?
                             </Typography>
                         </Box>
