@@ -31,9 +31,10 @@ const SignUpForm = () => {
     };
 
     return (
-        <form
+        <Box
+            component="form"
             onSubmit={handleSendEmail}
-            style={{
+            sx={{
                 width: "100%",
                 display: "flex",
                 justifyContent: "center",
@@ -65,7 +66,7 @@ const SignUpForm = () => {
                     Get Started{<ChevronRightSharp />}
                 </Button>
             </BoxForm>
-        </form>
+        </Box>
     );
 };
 

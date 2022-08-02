@@ -45,7 +45,7 @@ const FooterAuth = () => {
                     <List dense sx={{ marginBottom: "20px" }}>
                         <Grid container spacing={2}>
                             {FooterTexts.map((text) => (
-                                <Grid item xs={6} md={4} lg={3}>
+                                <Grid item xs={6} md={4} lg={3} key={text}>
                                     <ListItem
                                         sx={{
                                             color: "primary.light",

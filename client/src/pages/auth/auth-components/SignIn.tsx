@@ -1,46 +1,153 @@
-import React from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+    Box,
+    Button,
+    FilledInput,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    styled,
+    TextField,
+    Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import NavBarAuth from "../../../templates/auth/NavBarAuth";
 
+const ContainerBox = styled(Box)(({ theme }) => ({
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -45%)",
+    width: "450px",
+    backgroundColor: "black",
+    [theme.breakpoints.down("sm")]: {
+        width: "100%",
+    },
+}));
+
+const ContentBox = styled(Box)(({ theme }) => ({
+    margin: "40px 70px",
+    [theme.breakpoints.down("sm")]: {
+        margin: "40px 40px",
+    },
+}));
+
 const SignIn = () => {
+    const [showPass, setShowPass] = useState<boolean>(false);
+
+    const handleShowPass = () => {
+        setShowPass(!showPass);
+    };
+
     return (
         <>
             <NavBarAuth />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas
-            repellendus non, voluptatibus consequatur nisi maiores adipisci,
-            sint placeat odio modi quod facilis at! Possimus vitae id debitis
-            quod pariatur nam? Culpa dicta rerum illo ratione odio! Dicta
-            dolorem voluptates provident voluptatum officia omnis asperiores
-            mollitia quisquam dignissimos fuga non tenetur rem possimus repellat
-            molestiae eius, quod beatae in adipisci veniam? Quisquam recusandae
-            natus possimus eveniet ab sit nostrum eligendi adipisci laborum amet
-            fugit placeat vitae facilis totam, porro inventore eaque doloribus
-            quaerat asperiores minima nulla a eum blanditiis? Vitae, mollitia.
-            Deleniti iure totam saepe officia obcaecati, adipisci, nesciunt
-            aspernatur qui nostrum unde, nihil quas quo iste sequi assumenda sit
-            molestias atque expedita ullam cumque vitae magnam fugiat. Cum,
-            temporibus distinctio. Distinctio suscipit facere magni minima fugit
-            vitae aliquam veritatis dignissimos similique exercitationem
-            eligendi fuga voluptate quasi dolor vel voluptatem culpa repellendus
-            consequuntur, accusamus accusantium porro molestiae laborum quam
-            incidunt. Corporis? Accusantium quas veniam omnis illo, fugiat ab,
-            sequi aspernatur dolores repellat natus assumenda ad nostrum quam
-            excepturi deserunt? Non illum eligendi impedit qui architecto
-            repellendus molestiae vero iure, hic accusantium! Consectetur et
-            architecto dolor inventore repudiandae magnam repellendus labore
-            corporis animi sunt. Ipsa sit voluptate voluptatum adipisci, hic
-            asperiores fugit dolore neque quaerat animi reprehenderit recusandae
-            quae repudiandae veritatis quod! Quidem nam neque deleniti laborum
-            similique ipsam soluta provident? Earum distinctio, accusantium
-            ratione optio perspiciatis dolores, doloremque, voluptas consequatur
-            maxime numquam quisquam obcaecati dolore fugiat magni. Culpa,
-            veniam? Nobis, quis. Laborum architecto obcaecati aliquam sapiente
-            facere alias blanditiis? Animi autem distinctio dolore, dignissimos
-            blanditiis eos. Eum dolores quisquam nesciunt sed optio quo placeat,
-            odit et eligendi accusantium, assumenda provident debitis?
-            Necessitatibus id ab, ipsam magnam magni nam natus? Odit rerum
-            dignissimos possimus cupiditate dicta! Incidunt saepe sequi debitis.
-            Dolorum consequatur consequuntur cupiditate. Veniam consequatur
-            nesciunt reprehenderit tempora architecto ut porro?
+            <ContainerBox>
+                <ContentBox>
+                    <Typography
+                        color="white"
+                        variant="h4"
+                        sx={{ fontWeight: "bold", paddingBottom: "25px" }}
+                    >
+                        Sign In
+                    </Typography>
+                    <Box
+                        component="form"
+                        sx={{
+                            maxWidth: "100%",
+                        }}
+                    >
+                        <TextField
+                            id="email"
+                            label="Email"
+                            variant="filled"
+                            type="email"
+                            sx={{
+                                backgroundColor: "primary.dark",
+                                borderRadius: 1,
+                            }}
+                            fullWidth
+                            required
+                        />
+                        <div style={{ paddingBottom: "20px" }} />
+                        <FormControl
+                            variant="filled"
+                            fullWidth
+                            required
+                            sx={{
+                                backgroundColor: "primary.dark",
+                                borderRadius: 1,
+                            }}
+                        >
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <FilledInput
+                                id="password"
+                                type={showPass ? "text" : "password"}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleShowPass}
+                                            edge="end"
+                                        >
+                                            {showPass ? (
+                                                <VisibilityOff />
+                                            ) : (
+                                                <Visibility />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                        </FormControl>
+                        <div style={{ paddingBottom: "40px" }} />
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            fullWidth
+                            size="large"
+                            sx={{
+                                textTransform: "none",
+                            }}
+                        >
+                            Sign In
+                        </Button>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                paddingTop: "5px",
+                            }}
+                        >
+                            <Typography color="primary.light" variant="body2">
+                                Remember me
+                            </Typography>
+                            <Typography color="primary.light" variant="body2">
+                                Need help?
+                            </Typography>
+                        </Box>
+                    </Box>
+                    <div style={{ paddingBottom: "40px" }} />
+                    <Typography
+                        color="primary.light"
+                        variant="body1"
+                        sx={{ fontWeight: "bold" }}
+                    >
+                        New to Netflix?{" "}
+                        <Link
+                            to="/"
+                            style={{
+                                color: "white",
+                                textDecoration: "none",
+                            }}
+                        >
+                            Sign up now
+                        </Link>
+                    </Typography>
+                </ContentBox>
+            </ContainerBox>
         </>
     );
 };
