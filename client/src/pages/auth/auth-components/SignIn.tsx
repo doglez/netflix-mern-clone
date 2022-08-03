@@ -5,8 +5,6 @@ import {
     Checkbox,
     FilledInput,
     FormControl,
-    FormControlLabel,
-    FormGroup,
     IconButton,
     InputAdornment,
     InputLabel,
