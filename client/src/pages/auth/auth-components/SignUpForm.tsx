@@ -1,7 +1,21 @@
-import { Box, Button, styled, TextField, ThemeProvider } from "@mui/material";
+import {
+    Box,
+    Button,
+    styled,
+    TextField,
+    ThemeProvider,
+    Typography,
+} from "@mui/material";
 import { ChevronRightSharp } from "@mui/icons-material";
-import React, { useState } from "react";
+import React from "react";
 import { themeLight } from "../../../themes/theme";
+import * as Yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+type FormValues = {
+    email: string;
+};
 
 const BoxForm = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -18,22 +32,32 @@ const BoxForm = styled(Box)(({ theme }) => ({
     },
 }));
 
+// Validation data
+const Schema = Yup.object().shape({
+    email: Yup.string()
+        .email("Please enter a valid email address")
+        .required("Email is required!"),
+});
+
 const SignUpForm = () => {
-    const [email, setEmail] = useState<String | null>(null);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<FormValues>({
+        resolver: yupResolver(Schema),
+    });
 
-    const handleSendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log(email);
-    };
-
-    const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    };
+    const submitEmail = handleSubmit((data) => {
+        console.log(data);
+        reset();
+    });
 
     return (
         <Box
             component="form"
-            onSubmit={handleSendEmail}
+            onSubmit={submitEmail}
             sx={{
                 width: "100%",
                 display: "flex",
@@ -41,31 +65,49 @@ const SignUpForm = () => {
                 paddingTop: "10px",
             }}
         >
-            <BoxForm>
-                <ThemeProvider theme={themeLight}>
-                    <TextField
-                        id="email"
-                        fullWidth
-                        label="Email address"
-                        placeholder="Email address"
-                        onChange={handleChangeEmail}
-                        type="email"
-                        variant="standard"
-                        sx={{
-                            paddingLeft: "5px",
-                            backgroundColor: "white",
-                        }}
-                    />
-                </ThemeProvider>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    type="submit"
-                    sx={{ width: "45%" }}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                    alignItems: "center",
+                }}
+            >
+                <BoxForm>
+                    <ThemeProvider theme={themeLight}>
+                        <TextField
+                            {...register("email")}
+                            placeholder="Email address"
+                            type="email"
+                            fullWidth
+                            label="Email address"
+                            variant="standard"
+                            sx={{
+                                paddingLeft: "5px",
+                                backgroundColor: "white",
+                            }}
+                        />
+                    </ThemeProvider>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        type="submit"
+                        sx={{ width: "45%" }}
+                    >
+                        Get Started{<ChevronRightSharp />}
+                    </Button>
+                </BoxForm>
+
+                <Typography
+                    variant="caption"
+                    color="error"
+                    sx={{
+                        paddingTop: "10px",
+                    }}
                 >
-                    Get Started{<ChevronRightSharp />}
-                </Button>
-            </BoxForm>
+                    {errors.email?.message}
+                </Typography>
+            </Box>
         </Box>
     );
 };
