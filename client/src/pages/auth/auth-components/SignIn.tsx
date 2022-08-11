@@ -1,34 +1,19 @@
-import { Box, styled, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import NavBarAuth from "../../../templates/auth/NavBarAuth";
+import {
+    SignContainerBox,
+    SignContentBox,
+} from "../../../ui-components/BoxContainer&Content";
 import SignInForm from "./SignInForm";
-
-const ContainerBox = styled(Box)(({ theme }) => ({
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -45%)",
-    width: "450px",
-    backgroundColor: "black",
-    [theme.breakpoints.down("sm")]: {
-        width: "100%",
-    },
-}));
-
-const ContentBox = styled(Box)(({ theme }) => ({
-    margin: "40px 70px",
-    [theme.breakpoints.down("sm")]: {
-        margin: "40px 40px",
-    },
-}));
 
 const SignIn = () => {
     return (
         <>
             <NavBarAuth />
-            <ContainerBox>
-                <ContentBox>
+            <SignContainerBox>
+                <SignContentBox>
                     <Typography
                         color="white"
                         variant="h4"
@@ -45,7 +30,7 @@ const SignIn = () => {
                     >
                         New to Netflix?{" "}
                         <Link
-                            to="/"
+                            to="/signup"
                             style={{
                                 color: "white",
                                 textDecoration: "none",
@@ -54,8 +39,8 @@ const SignIn = () => {
                             Sign up now
                         </Link>
                     </Typography>
-                </ContentBox>
-            </ContainerBox>
+                </SignContentBox>
+            </SignContainerBox>
         </>
     );
 };

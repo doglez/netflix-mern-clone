@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Auth from "./pages/auth/Auth";
 import SignIn from "./pages/auth/auth-components/SignIn";
-import SignUp from "./pages/auth/auth-components/SignUp";
+import LandingPage from "./pages/auth/auth-components/LandingPage";
 import Home from "./pages/home/Home";
+import SignUp from "./pages/auth/auth-components/SignUp";
 
 function App() {
     const token: string = "";
@@ -14,8 +15,9 @@ function App() {
                 {!token ? (
                     <Route>
                         <Route path="/" element={<Auth />}>
-                            <Route index element={<SignUp />} />
+                            <Route index element={<LandingPage />} />
                             <Route path="signin" element={<SignIn />} />
+                            <Route path="signup" element={<SignUp />} />
                         </Route>
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Route>
