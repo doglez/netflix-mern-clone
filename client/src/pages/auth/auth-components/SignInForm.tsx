@@ -12,25 +12,14 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { SignInSchema } from "../../../validations/AuthValidations";
 
 type FormValue = {
     email: string;
     password: string;
 };
-
-// Validation data
-const Schema = Yup.object().shape({
-    email: Yup.string()
-        .email("Please enter a valid email address")
-        .required("Email is required!"),
-    password: Yup.string()
-        .max(60, "Your password must contain between 4 and 60 characters.")
-        .min(4, "Your password must contain between 4 and 60 characters.")
-        .required("Password is required!"),
-});
 
 const SignInForm = () => {
     const [showPass, setShowPass] = useState<boolean>(false);
@@ -39,7 +28,7 @@ const SignInForm = () => {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm<FormValue>({ resolver: yupResolver(Schema) });
+    } = useForm<FormValue>({ resolver: yupResolver(SignInSchema) });
 
     const handleShowPass = () => {
         setShowPass(!showPass);

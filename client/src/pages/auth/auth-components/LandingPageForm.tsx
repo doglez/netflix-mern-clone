@@ -9,9 +9,9 @@ import {
 import { ChevronRightSharp } from "@mui/icons-material";
 import React from "react";
 import { themeLight } from "../../../themes/theme";
-import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { LandingPageSchema } from "../../../validations/AuthValidations";
 
 type FormValues = {
     email: string;
@@ -32,13 +32,6 @@ const BoxForm = styled(Box)(({ theme }) => ({
     },
 }));
 
-// Validation data
-const Schema = Yup.object().shape({
-    email: Yup.string()
-        .email("Please enter a valid email address")
-        .required("Email is required!"),
-});
-
 const LandingPageForm = () => {
     const {
         register,
@@ -46,7 +39,7 @@ const LandingPageForm = () => {
         formState: { errors },
         reset,
     } = useForm<FormValues>({
-        resolver: yupResolver(Schema),
+        resolver: yupResolver(LandingPageSchema),
     });
 
     const submitEmail = handleSubmit((data) => {
