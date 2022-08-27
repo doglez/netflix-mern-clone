@@ -17,7 +17,10 @@ function App() {
                         <Route path="/" element={<Auth />}>
                             <Route index element={<LandingPage />} />
                             <Route path="signin" element={<SignIn />} />
-                            <Route path="signup" element={<SignUp />} />
+                            <Route path="signup">
+                                <Route index element={<SignUp />} />
+                                <Route path=":email" element={<SignUp />} />
+                            </Route>
                         </Route>
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Route>

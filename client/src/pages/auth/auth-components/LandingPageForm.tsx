@@ -12,6 +12,7 @@ import { themeLight } from "../../../themes/theme";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LandingPageSchema } from "../../../validations/AuthValidations";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     email: string;
@@ -33,6 +34,8 @@ const BoxForm = styled(Box)(({ theme }) => ({
 }));
 
 const LandingPageForm = () => {
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -43,7 +46,7 @@ const LandingPageForm = () => {
     });
 
     const submitEmail = handleSubmit((data) => {
-        console.log(data);
+        navigate(`/signup/${data.email}`);
         reset();
     });
 
