@@ -36,8 +36,9 @@ mkdir src _data src/config src/controllers src/database src/middleware src/model
 touch src/index.ts
 
 # Add .env
-touch .env
-touch .env.example
+touch dev.env
+touch example.env
+touch prod.env
 
 # Se corre con el siguiente script
 # bash Bootstrap_MERN.sh
