@@ -1,13 +1,10 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import ErrorResponse from "../utiles/ErrorResponse";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/Config";
 import User from "../models/User";
 import AsyncHandler from "./AsyncHandler";
-
-interface IReqUser extends Request {
-    user: any;
-}
+import { IReqUser } from "../interfaces/Interfaces";
 
 /**
  * @name Protect
