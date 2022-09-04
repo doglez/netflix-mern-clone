@@ -1,5 +1,3 @@
-import { Response } from "express";
-
 /**
  * @name ErrorResponse
  * @description Class to create a message with status code
@@ -9,15 +7,9 @@ import { Response } from "express";
  */
 class ErrorResponse extends Error {
     statusCode: number;
-    constructor(message: any, statusCode: number) {
+    constructor(message: string, statusCode: number) {
         super(message);
         this.statusCode = statusCode;
-    }
-
-    errorReturn(res: Response) {
-        return res.status(this.statusCode).json({
-            error: this.message,
-        });
     }
 }
 
