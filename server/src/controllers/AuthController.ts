@@ -53,6 +53,44 @@ export const SignUp = AsyncHandler(
 );
 
 /**
+ * @name SignIn
+ * @description Login into the app
+ * @route POST /api/v1/auth/signin
+ * @access Public
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise<void | Response<object>>} object
+ */
+export const SignIn = AsyncHandler(
+    async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void | Response<object>> => {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return next(
+                new ErrorResponse("Please provide an email and password", 400)
+            );
+        }
+
+        const user = await User.findOne({ email }).select("+password");
+        if (!user) {
+            return next(new ErrorResponse("Invalid credentials", 401));
+        }
+
+        const isMatch = await user.matchPassword(password);
+        if (!isMatch) {
+            return next(new ErrorResponse("Invalid credentials", 401));
+        }
+
+        SendTokenResponse(user, 201, res);
+    }
+);
+
+/**
  * @name sendTokenResponse
  * @description Get token from model and create cookie
  * @param {IUser} user

@@ -48,7 +48,7 @@ export const Protect = AsyncHandler(
 );
 
 /**
- * @name authorize
+ * @name Authorize
  * @description Authorize the access if user has permissions
  * @param {any} roles
  */
