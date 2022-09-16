@@ -34,7 +34,6 @@ const ProfileSchema = new mongoose.Schema<IProfile>(
         },
         picture: {
             type: String,
-            select: false,
             default: "img-1.png",
         },
     },

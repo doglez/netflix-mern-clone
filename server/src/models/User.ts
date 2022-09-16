@@ -7,7 +7,6 @@ import crypto from "crypto";
 export interface IUser {
     id: number;
     name: string;
-    lastName: string;
     email: string;
     password: string;
     picture: string;
@@ -40,10 +39,6 @@ const UserSchema = new mongoose.Schema<IUser>(
         password: {
             type: String,
             select: false,
-        },
-        picture: {
-            type: String,
-            default: "img-1.png",
         },
         resetPasswordToken: String,
         resetPasswordExpire: Date,

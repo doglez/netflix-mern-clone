@@ -169,12 +169,11 @@ export const UpdateMe = AsyncHandler(
         res: Response,
         _next: NextFunction
     ): Promise<Response<object>> => {
-        const { picture, name } = req.body;
+        const { name } = req.body;
 
         const user = await User.findByIdAndUpdate(
             req.user.id,
             {
-                picture,
                 name,
             },
             { new: true, runValidators: true }
