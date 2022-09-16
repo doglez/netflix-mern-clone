@@ -10,6 +10,7 @@ export interface IUser {
     lastName: string;
     email: string;
     password: string;
+    picture: string;
     resetPasswordToken: string;
     resetPasswordExpire: Date;
     getSignedJwtToken(): Function;
@@ -39,6 +40,10 @@ const UserSchema = new mongoose.Schema<IUser>(
         password: {
             type: String,
             select: false,
+        },
+        picture: {
+            type: String,
+            default: "img-1.png",
         },
         resetPasswordToken: String,
         resetPasswordExpire: Date,

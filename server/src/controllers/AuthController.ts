@@ -154,6 +154,39 @@ export const GetMe = AsyncHandler(
 );
 
 /**
+ * @name UpdateMe
+ * @description Update my own info
+ * @route PUT /api/v1/auth/updateme
+ * @access Private
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise< Response<object>>} object
+ */
+export const UpdateMe = AsyncHandler(
+    async (
+        req: IReqUser,
+        res: Response,
+        _next: NextFunction
+    ): Promise<Response<object>> => {
+        const { picture, name } = req.body;
+
+        const user = await User.findByIdAndUpdate(
+            req.user.id,
+            {
+                picture,
+                name,
+            },
+            { new: true, runValidators: true }
+        );
+
+        return res.status(200).json({
+            data: user,
+        });
+    }
+);
+
+/**
  * @name sendTokenResponse
  * @description Get token from model and create cookie
  * @param {IUser} user
