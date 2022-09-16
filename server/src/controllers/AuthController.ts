@@ -1,5 +1,6 @@
 import { CookieOptions, NextFunction, Request, Response } from "express";
 import { JWT_COOKIE_EXPIRE, NODE_ENV } from "../config/Config";
+import { IReqUser } from "../interfaces/Interfaces";
 import AsyncHandler from "../middleware/AsyncHandler";
 import Token from "../models/Token";
 import User, { IUser } from "../models/User";
@@ -87,6 +88,44 @@ export const SignIn = AsyncHandler(
         }
 
         SendTokenResponse(user, 201, res);
+    }
+);
+
+/**
+ * @name SignOut
+ * @description Log out into the app
+ * @route GET /api/v1/auth/signout
+ * @access Private
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise<void | Response<object>>} object
+ */
+export const SignOut = AsyncHandler(
+    async (
+        req: IReqUser,
+        res: Response,
+        _next: NextFunction
+    ): Promise<void | Response<object>> => {
+        const barearTokenReq = req.headers.authorization;
+        const tokenHeader = barearTokenReq?.split(" ")[1];
+
+        const tokenFind: any = await Token.findOne({
+            user: req.user.id,
+            token: tokenHeader,
+        });
+
+        tokenFind.status = "disable";
+        await tokenFind.save();
+
+        return res
+            .status(200)
+            .cookie("token", "none", {
+                expires: new Date(Date.now() + 10 * 1000),
+            })
+            .json({
+                status: true,
+            });
     }
 );
 
