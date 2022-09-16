@@ -29,6 +29,7 @@ export const SignUp = AsyncHandler(
         }
 
         const user = await User.create({
+            name: email,
             email,
             password,
         });
@@ -42,9 +43,7 @@ export const SignUp = AsyncHandler(
                 text,
             });
 
-            return res.status(200).json({
-                data: "Email sent",
-            });
+            SendTokenResponse(user, 201, res);
         } catch (error) {
             console.error(error);
 
