@@ -99,14 +99,14 @@ export const SignIn = AsyncHandler(
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
- * @returns {Promise<void | Response<object>>} object
+ * @returns {Promise<Response<object>>} object
  */
 export const SignOut = AsyncHandler(
     async (
         req: IReqUser,
         res: Response,
         _next: NextFunction
-    ): Promise<void | Response<object>> => {
+    ): Promise<Response<object>> => {
         const barearTokenReq = req.headers.authorization;
         const tokenHeader = barearTokenReq?.split(" ")[1];
 
@@ -126,6 +126,30 @@ export const SignOut = AsyncHandler(
             .json({
                 status: true,
             });
+    }
+);
+
+/**
+ * @name GetMe
+ * @description Get my own info
+ * @route GET /api/v1/auth/me
+ * @access Private
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise< Response<object>>} object
+ */
+export const GetMe = AsyncHandler(
+    async (
+        req: IReqUser,
+        res: Response,
+        _next: NextFunction
+    ): Promise<Response<object>> => {
+        const user = await User.findById(req.user.id);
+
+        return res.status(200).json({
+            data: user,
+        });
     }
 );
 
