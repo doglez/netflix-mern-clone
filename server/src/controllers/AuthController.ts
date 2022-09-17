@@ -186,6 +186,77 @@ export const UpdateMe = AsyncHandler(
 );
 
 /**
+ * @name UpdatePass
+ * @description Update my own password
+ * @route PUT /api/v1/auth/updatepass
+ * @access Private
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise<void | Response<object>>} object
+ */
+export const UpdatePass = AsyncHandler(
+    async (
+        req: IReqUser,
+        res: Response,
+        next: NextFunction
+    ): Promise<void | Response<object>> => {
+        const { currentPassword, newPassword, passwordConfirm } = req.body;
+
+        if (!currentPassword || !newPassword || !passwordConfirm) {
+            return next(
+                new ErrorResponse(
+                    "Current password, new password and password confirmation are required",
+                    400
+                )
+            );
+        }
+
+        if (newPassword !== passwordConfirm) {
+            return next(new ErrorResponse("Passwords must match", 400));
+        }
+
+        const user: any = await User.findById(req.user.id).select("+password");
+
+        const isMatch = await user.matchPassword(currentPassword);
+        if (!isMatch) {
+            return next(new ErrorResponse("Invalid credentials", 401));
+        }
+
+        const isNotMatch = await user.matchPassword(newPassword);
+        if (isNotMatch) {
+            return next(
+                new ErrorResponse(
+                    "The current password cannot be the same as the new password",
+                    401
+                )
+            );
+        }
+
+        user.password = newPassword;
+        await user.save();
+
+        const text = `Your password has been updated.`;
+
+        try {
+            await SendEmails({
+                email: user.email,
+                subject: "Password updates",
+                text,
+            });
+
+            return res.status(200).json({
+                data: "Password updates",
+            });
+        } catch (error) {
+            console.error(error);
+
+            return next(new ErrorResponse(`Email could not be sent`, 500));
+        }
+    }
+);
+
+/**
  * @name sendTokenResponse
  * @description Get token from model and create cookie
  * @param {IUser} user

@@ -5,6 +5,7 @@ import {
     SignOut,
     SignUp,
     UpdateMe,
+    UpdatePass,
 } from "../controllers/AuthController";
 import { Protect } from "../middleware/AuthMideleware";
 
@@ -15,5 +16,6 @@ AuthRoutes.post("/signin", SignIn);
 AuthRoutes.get("/signout", Protect, SignOut);
 AuthRoutes.get("/me", Protect, GetMe);
 AuthRoutes.put("/updateme", Protect, UpdateMe);
+AuthRoutes.put("/updatepass", Protect, UpdatePass);
 
 export default AuthRoutes;
