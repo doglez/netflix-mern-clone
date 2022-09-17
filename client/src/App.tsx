@@ -5,6 +5,8 @@ import SignIn from "./pages/auth/auth-components/SignIn";
 import LandingPage from "./pages/auth/auth-components/LandingPage";
 import Home from "./pages/home/Home";
 import SignUp from "./pages/auth/auth-components/SignUp";
+import ForgotPassword from "./pages/auth/auth-components/ForgotPassword";
+import ResetPassword from "./pages/auth/auth-components/ResetPassword";
 
 function App() {
     const token: string = "";
@@ -21,6 +23,14 @@ function App() {
                                 <Route index element={<SignUp />} />
                                 <Route path=":email" element={<SignUp />} />
                             </Route>
+                            <Route
+                                path="forgotpassword"
+                                element={<ForgotPassword />}
+                            />
+                            <Route
+                                path="resetpassword/:resettoken"
+                                element={<ResetPassword />}
+                            />
                         </Route>
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Route>

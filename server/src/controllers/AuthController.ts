@@ -283,7 +283,7 @@ export const ForgotPass = AsyncHandler(
 
         await user.save({ validateBeforeSave: false });
 
-        const resetUrl = `${CORS_ADMIT_URL}/forgotpassword/${resetToken}`;
+        const resetUrl = `${CORS_ADMIT_URL}/resetpassword/${resetToken}`;
 
         const text = `You are receiving this email because you (or someone else) has requested the reset of password. Please make a PUT request to:\n\n${resetUrl}`;
 

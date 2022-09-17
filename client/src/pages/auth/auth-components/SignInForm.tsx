@@ -15,6 +15,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { SignInSchema } from "../../../validations/AuthValidations";
+import { Link } from "react-router-dom";
 
 type FormValue = {
     email: string;
@@ -144,15 +145,17 @@ const SignInForm = () => {
                         Remember me
                     </label>
                 </Box>
-                <Typography
-                    color="primary.light"
-                    variant="body2"
-                    sx={{
-                        paddingTop: "5px",
+                <Link
+                    to="/forgotpassword"
+                    style={{
+                        color: "rgb(97, 97, 97)",
+                        textDecoration: "none",
+                        fontSize: "0.875rem",
+                        paddingTop: "3px",
                     }}
                 >
                     Need help?
-                </Typography>
+                </Link>
             </Box>
         </Box>
     );
