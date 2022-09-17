@@ -1,11 +1,12 @@
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import { JWT_COOKIE_EXPIRE, NODE_ENV } from "../config/Config";
+import { CORS_ADMIT_URL, JWT_COOKIE_EXPIRE, NODE_ENV } from "../config/Config";
 import { IReqUser } from "../interfaces/Interfaces";
 import AsyncHandler from "../middleware/AsyncHandler";
 import Token from "../models/Token";
 import User, { IUser } from "../models/User";
 import ErrorResponse from "../utiles/ErrorResponse";
 import SendEmails from "../utiles/SendEmails";
+import crypto from "crypto";
 
 /**
  * @name SignUp
@@ -234,6 +235,135 @@ export const UpdatePass = AsyncHandler(
         }
 
         user.password = newPassword;
+        await user.save();
+
+        const text = `Your password has been updated.`;
+
+        try {
+            await SendEmails({
+                email: user.email,
+                subject: "Password updates",
+                text,
+            });
+
+            return res.status(200).json({
+                data: "Password updates",
+            });
+        } catch (error) {
+            console.error(error);
+
+            return next(new ErrorResponse(`Email could not be sent`, 500));
+        }
+    }
+);
+
+/**
+ * @name ForgotPass
+ * @description Update my own info
+ * @route POST /api/v1/auth/forgotpassword
+ * @access Public
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise<void | Response<object>>} object
+ */
+export const ForgotPass = AsyncHandler(
+    async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void | Response<object>> => {
+        const user = await User.findOne({ email: req.body.email });
+
+        if (!user) {
+            return next(new ErrorResponse(`You are not a user yet`, 404));
+        }
+
+        const resetToken = user.getResetPasswordToken();
+
+        await user.save({ validateBeforeSave: false });
+
+        const resetUrl = `${CORS_ADMIT_URL}/forgotpassword/${resetToken}`;
+
+        const text = `You are receiving this email because you (or someone else) has requested the reset of password. Please make a PUT request to:\n\n${resetUrl}`;
+
+        try {
+            await SendEmails({
+                email: user.email,
+                subject: "Password reset token",
+                text,
+            });
+
+            return res.status(200).json({
+                data: "Email sent",
+            });
+        } catch (error) {
+            console.error(error);
+
+            return next(new ErrorResponse(`Email could not be sent`, 500));
+        }
+    }
+);
+
+/**
+ * @name ResetPass
+ * @description Update my own password
+ * @route PUT /api/v1/auth/resetpassword/:resettoken
+ * @access Public
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise<void | Response<object>>} object
+ */
+export const ResetPass = AsyncHandler(
+    async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void | Response<object>> => {
+        const { password, passwordConfirm } = req.body;
+
+        if (!password || !passwordConfirm) {
+            return next(
+                new ErrorResponse(
+                    "Password and password confirmation are required",
+                    400
+                )
+            );
+        }
+
+        if (password !== passwordConfirm) {
+            return next(new ErrorResponse("Passwords must match", 400));
+        }
+
+        const resetPasswordToken = crypto
+            .createHash("sha256")
+            .update(req.params.resettoken)
+            .digest("hex");
+
+        const user: any = await User.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: { $gt: Date.now() },
+        }).select("+password");
+
+        if (!user) {
+            return next(new ErrorResponse("Invalid token", 400));
+        }
+
+        console.log("first");
+        const isNotMatch = await user.matchPassword(password);
+        if (isNotMatch) {
+            return next(
+                new ErrorResponse(
+                    "The new password cannot be the same as the current password",
+                    401
+                )
+            );
+        }
+
+        user.password = password;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
         await user.save();
 
         const text = `Your password has been updated.`;

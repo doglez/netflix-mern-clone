@@ -1,6 +1,8 @@
 import expres from "express";
 import {
+    ForgotPass,
     GetMe,
+    ResetPass,
     SignIn,
     SignOut,
     SignUp,
@@ -17,5 +19,7 @@ AuthRoutes.get("/signout", Protect, SignOut);
 AuthRoutes.get("/me", Protect, GetMe);
 AuthRoutes.put("/updateme", Protect, UpdateMe);
 AuthRoutes.put("/updatepass", Protect, UpdatePass);
+AuthRoutes.post("/forgotpassword", ForgotPass);
+AuthRoutes.put("/resetpassword/:resettoken", ResetPass);
 
 export default AuthRoutes;
