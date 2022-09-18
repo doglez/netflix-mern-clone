@@ -1,16 +1,30 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Box, Button, FilledInput, FormControl, IconButton, InputAdornment, InputLabel, Typography } from "@mui/material";
+import {
+    Box,
+    Button,
+    FilledInput,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { ResetPasswordSchema } from "../../../validations/AuthValidations";
 
 type FormValue = {
     password: string;
     passwordConfirm: string;
+    resettoken: string;
 };
 
+const resettoken = window.location.pathname.split("/")[2];
+
 const ResetPasswordForm = () => {
+    const navigate = useNavigate();
     const [showPass, setShowPass] = useState<boolean>(false);
     const {
         register,
@@ -26,8 +40,10 @@ const ResetPasswordForm = () => {
     };
 
     const submitResetPassword = handleSubmit((data) => {
+        data.resettoken = resettoken;
         console.log(data);
         reset();
+        navigate("../signin", { replace: true });
     });
 
     return (
