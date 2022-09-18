@@ -4,7 +4,7 @@
 npx create-react-app client --template typescript
 cd client
 
-npm install @mui/material @emotion/react @emotion/styled @mui/icons-material normalize.css react-router-dom axios bootstrap jwt-decode react-redux react-router-dom redux redux-devtools-extension redux-thunk yup yup-password
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material normalize.css react-router-dom axios jwt-decode react-redux @reduxjs/toolkit redux-thunk yup yup-password @hookform/resolvers react-hook-form
 
 # File cleaning
 rm -rf public/logo192.png public/logo512.png public/manifest.json public/robots.txt src/App.css src/App.test.tsx src/index.css src/logo.svg src/react-app-env.d.ts src/reportWebVitals.ts src/setupTests.ts

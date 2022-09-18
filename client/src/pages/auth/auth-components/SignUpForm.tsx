@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAppDispatch } from "../../../hooks/redux-hooks";
+import { SignUpCrt } from "../../../redux/reducers/authReducers/authSlice";
 import { SignUpSchema } from "../../../validations/AuthValidations";
 
 type FormValue = {
@@ -23,6 +25,7 @@ type FormValue = {
 
 const SignUpForm = () => {
     const pathname = window.location.pathname;
+    const dispatch = useAppDispatch();
     const [showPass, setShowPass] = useState<boolean>(false);
     const [email, setEmail] = useState<string>(pathname.split("/")[2]);
 
@@ -42,9 +45,9 @@ const SignUpForm = () => {
     };
 
     const submitSignUp = handleSubmit((data) => {
-        console.log(data);
         setEmail("");
         reset();
+        dispatch(SignUpCrt(data));
     });
 
     return (
