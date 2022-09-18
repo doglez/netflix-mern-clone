@@ -7,9 +7,10 @@ import Home from "./pages/home/Home";
 import SignUp from "./pages/auth/auth-components/SignUp";
 import ForgotPassword from "./pages/auth/auth-components/ForgotPassword";
 import ResetPassword from "./pages/auth/auth-components/ResetPassword";
+import { useAppSelector } from "./hooks/redux-hooks";
 
 function App() {
-    const token: string = "";
+    const token: string = useAppSelector((state) => state.authReucer.token);
 
     return (
         <BrowserRouter>

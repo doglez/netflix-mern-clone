@@ -36,12 +36,6 @@ const getInitialState = () => {
         if (new Date(expireToken * 1000) > new Date()) {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-            axios.get(`${API_URL_SERVER}/auth/tokenval`).catch((error) => {
-                console.error(error);
-                localStorage.removeItem("RIXefsVzPCZXUxVlHaxuyOqZ");
-                return initialState;
-            });
-
             return { token, error: "", status: "", data: "" };
         }
 
@@ -53,7 +47,7 @@ const getInitialState = () => {
     }
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
     name: "authReucer",
     initialState: getInitialState(),
     reducers: {
