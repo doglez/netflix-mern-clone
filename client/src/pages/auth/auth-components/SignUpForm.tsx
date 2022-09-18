@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAppDispatch } from "../../../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
 import { SignUpCrt } from "../../../redux/reducers/authReducers/authSlice";
 import { SignUpSchema } from "../../../validations/AuthValidations";
 
@@ -25,6 +25,7 @@ type FormValue = {
 
 const SignUpForm = () => {
     const pathname = window.location.pathname;
+    const errorState = useAppSelector((state) => state.authReucer.error);
     const dispatch = useAppDispatch();
     const [showPass, setShowPass] = useState<boolean>(false);
     const [email, setEmail] = useState<string>(pathname.split("/")[2]);
@@ -52,6 +53,17 @@ const SignUpForm = () => {
 
     return (
         <Box component="form" onSubmit={submitSignUp} sx={{ maxWidth: "100%" }}>
+            {errorState ? (
+                <Typography
+                    variant="caption"
+                    color="error"
+                    sx={{ paddingTop: "10px" }}
+                >
+                    {errorState}
+                </Typography>
+            ) : (
+                <></>
+            )}
             <TextField
                 {...register("email")}
                 label="Email"
