@@ -3,6 +3,8 @@ import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
+import { forgotPasswordCrt } from "../../../redux/reducers/authReducers/authSlice";
 import { ForgotPasswordSchema } from "../../../validations/AuthValidations";
 
 type FormValue = {
@@ -10,6 +12,8 @@ type FormValue = {
 };
 
 const ForgotPasswordForm = () => {
+    const { error, data } = useAppSelector((state) => state.authReucer);
+    const dispatch = useAppDispatch();
     const {
         register,
         handleSubmit,
@@ -20,7 +24,7 @@ const ForgotPasswordForm = () => {
     });
 
     const submitForgotPassword = handleSubmit((data) => {
-        console.log(data);
+        dispatch(forgotPasswordCrt(data));
         reset();
     });
 
@@ -32,6 +36,28 @@ const ForgotPasswordForm = () => {
                 maxWidth: "100%",
             }}
         >
+            {error ? (
+                <Typography
+                    variant="caption"
+                    color="error"
+                    sx={{ paddingTop: "10px" }}
+                >
+                    {error}
+                </Typography>
+            ) : (
+                <></>
+            )}
+            {data ? (
+                <Typography
+                    variant="caption"
+                    color="success.main"
+                    sx={{ paddingTop: "10px" }}
+                >
+                    {String(data)}
+                </Typography>
+            ) : (
+                <></>
+            )}
             <TextField
                 {...register("email")}
                 label="Email"

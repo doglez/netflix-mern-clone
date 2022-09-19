@@ -101,6 +101,18 @@ const authSlice = createSlice({
             state.status = "";
             state.data = "";
         },
+        forgotPasswordSuccess: (state, action) => {
+            state.token = "";
+            state.error = "";
+            state.status = "";
+            state.data = action.payload.data;
+        },
+        forgotpPsswordFail: (state, action) => {
+            state.token = "";
+            state.error = action.payload.error;
+            state.status = "";
+            state.data = "";
+        },
     },
 });
 
@@ -126,7 +138,24 @@ export const SignInCrt =
             .catch((e) => dispatch(signInFail(e.response.data)));
     };
 
-export const { signUpSuccess, signUpFail, signInSuccess, signInFail } =
-    authSlice.actions;
+export const forgotPasswordCrt =
+    (data: any): any =>
+    async (dispatch: any) => {
+        await axios
+            .post(`${API_URL_SERVER}/auth/forgotpassword`, data)
+            .then((r) => {
+                dispatch(forgotPasswordSuccess(r.data));
+            })
+            .catch((e) => dispatch(forgotpPsswordFail(e.response.data)));
+    };
+
+export const {
+    signUpSuccess,
+    signUpFail,
+    signInSuccess,
+    signInFail,
+    forgotPasswordSuccess,
+    forgotpPsswordFail,
+} = authSlice.actions;
 
 export default authSlice.reducer;
