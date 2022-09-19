@@ -39,14 +39,64 @@ function App() {
                     <Route>
                         <Route
                             path="/"
-                            element={<Navigate to="/home" replace />}
+                            element={<Navigate to="/browse" replace />}
                         />
                         <Route path="/">
-                            <Route path="home" element={<Home />} />
+                            <Route path="browse" element={<Home />}>
+                                <Route index element={<LandingPage />} />
+                                <Route path="genre">
+                                    <Route
+                                        path="83"
+                                        element={<LandingPage />}
+                                    />
+                                    <Route
+                                        path="34399"
+                                        element={<LandingPage />}
+                                    />
+                                </Route>
+                                <Route
+                                    path="my-list"
+                                    element={<LandingPage />}
+                                />
+                                <Route
+                                    path="original-audio"
+                                    element={<LandingPage />}
+                                />
+                            </Route>
+                            <Route path="latest" element={<Home />} />
+                            <Route path="search" element={<Home />} />
+                            <Route path="Kids" element={<Home />}>
+                                <Route index element={<LandingPage />} />
+                                <Route
+                                    path="characters"
+                                    element={<LandingPage />}
+                                />
+                                <Route path="genre">
+                                    <Route
+                                        path="2496491"
+                                        element={<LandingPage />}
+                                    />
+                                    <Route
+                                        path="2495600"
+                                        element={<LandingPage />}
+                                    />
+                                </Route>
+                                <Route
+                                    path="my-list"
+                                    element={<LandingPage />}
+                                />
+                                <Route
+                                    path="original-audio"
+                                    element={<LandingPage />}
+                                />
+                                <Route path="latest" element={<Home />} />
+                                <Route path="search" element={<Home />} />
+                            </Route>
+                            <Route path="profiles/manage" element={<Home />} />
                         </Route>
                         <Route
                             path="*"
-                            element={<Navigate to="/home" replace />}
+                            element={<Navigate to="/browse" replace />}
                         />
                     </Route>
                 )}
