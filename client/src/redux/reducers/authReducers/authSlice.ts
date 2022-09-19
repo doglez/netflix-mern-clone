@@ -107,7 +107,29 @@ const authSlice = createSlice({
             state.status = "";
             state.data = action.payload.data;
         },
-        forgotpPsswordFail: (state, action) => {
+        forgotPasswordFail: (state, action) => {
+            state.token = "";
+            state.error = action.payload.error;
+            state.status = "";
+            state.data = "";
+        },
+        resetPasswordSuccess: (state, action) => {
+            // The token is stored in local storage under the name RIXefsVzPCZXUxVlHaxuyOqZ
+            localStorage.setItem(
+                "RIXefsVzPCZXUxVlHaxuyOqZ",
+                JSON.stringify(action.payload.token)
+            );
+
+            axios.defaults.headers.post[
+                "Authorization"
+            ] = `Bearer ${action.payload.token}`;
+
+            state.token = action.payload.token;
+            state.error = "";
+            state.status = "";
+            state.data = action.payload.data;
+        },
+        resetPasswordFail: (state, action) => {
             state.token = "";
             state.error = action.payload.error;
             state.status = "";
@@ -146,7 +168,21 @@ export const forgotPasswordCrt =
             .then((r) => {
                 dispatch(forgotPasswordSuccess(r.data));
             })
-            .catch((e) => dispatch(forgotpPsswordFail(e.response.data)));
+            .catch((e) => dispatch(forgotPasswordFail(e.response.data)));
+    };
+
+export const resetPasswordCrt =
+    (data: any): any =>
+    async (dispatch: any) => {
+        await axios
+            .put(`${API_URL_SERVER}/auth/resetpassword/${data.resettoken}`, {
+                password: data.password,
+                passwordConfirm: data.passwordConfirm,
+            })
+            .then((r) => {
+                dispatch(resetPasswordSuccess(r.data));
+            })
+            .catch((e) => dispatch(resetPasswordFail(e.response.data)));
     };
 
 export const {
@@ -155,7 +191,9 @@ export const {
     signInSuccess,
     signInFail,
     forgotPasswordSuccess,
-    forgotpPsswordFail,
+    forgotPasswordFail,
+    resetPasswordSuccess,
+    resetPasswordFail,
 } = authSlice.actions;
 
 export default authSlice.reducer;

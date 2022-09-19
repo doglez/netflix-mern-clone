@@ -375,9 +375,7 @@ export const ResetPass = AsyncHandler(
                 text,
             });
 
-            return res.status(200).json({
-                data: "Password updates",
-            });
+            SendTokenResponse(user, 201, res);
         } catch (error) {
             console.error(error);
 

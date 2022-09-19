@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
+import { resetPasswordCrt } from "../../../redux/reducers/authReducers/authSlice";
 import { ResetPasswordSchema } from "../../../validations/AuthValidations";
 
 type FormValue = {
@@ -24,7 +25,8 @@ type FormValue = {
 const resettoken = window.location.pathname.split("/")[2];
 
 const ResetPasswordForm = () => {
-    const navigate = useNavigate();
+    const error = useAppSelector((state) => state.authReucer.error);
+    const dispatch = useAppDispatch();
     const [showPass, setShowPass] = useState<boolean>(false);
     const {
         register,
@@ -41,9 +43,8 @@ const ResetPasswordForm = () => {
 
     const submitResetPassword = handleSubmit((data) => {
         data.resettoken = resettoken;
-        console.log(data);
+        dispatch(resetPasswordCrt(data));
         reset();
-        navigate("../signin", { replace: true });
     });
 
     return (
@@ -52,6 +53,17 @@ const ResetPasswordForm = () => {
             onSubmit={submitResetPassword}
             sx={{ maxWidth: "100%" }}
         >
+            {error ? (
+                <Typography
+                    variant="caption"
+                    color="error"
+                    sx={{ paddingTop: "10px" }}
+                >
+                    {error}
+                </Typography>
+            ) : (
+                <></>
+            )}
             <FormControl
                 variant="filled"
                 fullWidth
