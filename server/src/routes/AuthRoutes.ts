@@ -6,6 +6,7 @@ import {
     SignIn,
     SignOut,
     SignUp,
+    TokenValidationEnable,
     UpdateMe,
     UpdatePass,
 } from "../controllers/AuthController";
@@ -21,5 +22,6 @@ AuthRoutes.put("/updateme", Protect, UpdateMe);
 AuthRoutes.put("/updatepass", Protect, UpdatePass);
 AuthRoutes.post("/forgotpassword", ForgotPass);
 AuthRoutes.put("/resetpassword/:resettoken", ResetPass);
+AuthRoutes.get("/valtoken", Protect, TokenValidationEnable);
 
 export default AuthRoutes;

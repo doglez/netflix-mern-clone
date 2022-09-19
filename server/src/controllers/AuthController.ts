@@ -387,7 +387,37 @@ export const ResetPass = AsyncHandler(
 );
 
 /**
- * @name sendTokenResponse
+ * @name TokenValidationEnable
+ * @description Validate that the token is enable
+ * @route GET /api/v1/auth/valtoken
+ * @access Private
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise<void>} void
+ */
+export const TokenValidationEnable = AsyncHandler(
+    async (
+        req: IReqUser,
+        _res: Response,
+        next: NextFunction
+    ): Promise<void> => {
+        const bearerToken = String(req.headers.authorization);
+        const token = bearerToken.split(" ")[1];
+
+        const tokenFind = await Token.findOne({
+            user: req.user.id,
+            token,
+        });
+
+        if (tokenFind?.status === "disable") {
+            return next(new ErrorResponse("The token is not valid", 400));
+        }
+    }
+);
+
+/**
+ * @name SendTokenResponse
  * @description Get token from model and create cookie
  * @param {IUser} user
  * @param {Number} statusCode

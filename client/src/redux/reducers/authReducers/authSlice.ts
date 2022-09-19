@@ -36,6 +36,12 @@ const getInitialState = () => {
         if (new Date(expireToken * 1000) > new Date()) {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
+            axios.get(`${API_URL_SERVER}/auth/valtoken`).catch((e) => {
+                localStorage.removeItem("RIXefsVzPCZXUxVlHaxuyOqZ");
+                window.location.reload();
+                return initialState;
+            });
+
             return { token, error: "", status: "", data: "" };
         }
 
@@ -81,7 +87,9 @@ export const SignUpCrt =
     async (dispatch: any) => {
         await axios
             .post(`${API_URL_SERVER}/auth/signup`, data)
-            .then((r) => dispatch(signUpSuccess(r.data)))
+            .then((r) => {
+                dispatch(signUpSuccess(r.data));
+            })
             .catch((e) => dispatch(signUpFail(e.response.data)));
     };
 
