@@ -79,6 +79,28 @@ const authSlice = createSlice({
             state.status = "";
             state.data = "";
         },
+        signInSuccess: (state, action) => {
+            // The token is stored in local storage under the name RIXefsVzPCZXUxVlHaxuyOqZ
+            localStorage.setItem(
+                "RIXefsVzPCZXUxVlHaxuyOqZ",
+                JSON.stringify(action.payload.token)
+            );
+
+            axios.defaults.headers.post[
+                "Authorization"
+            ] = `Bearer ${action.payload.token}`;
+
+            state.token = action.payload.token;
+            state.error = "";
+            state.status = "";
+            state.data = "";
+        },
+        signInFail: (state, action) => {
+            state.token = "";
+            state.error = action.payload.error;
+            state.status = "";
+            state.data = "";
+        },
     },
 });
 
@@ -93,6 +115,18 @@ export const SignUpCrt =
             .catch((e) => dispatch(signUpFail(e.response.data)));
     };
 
-export const { signUpSuccess, signUpFail } = authSlice.actions;
+export const SignInCrt =
+    (data: any): any =>
+    async (dispatch: any) => {
+        await axios
+            .post(`${API_URL_SERVER}/auth/signin`, data)
+            .then((r) => {
+                dispatch(signInSuccess(r.data));
+            })
+            .catch((e) => dispatch(signInFail(e.response.data)));
+    };
+
+export const { signUpSuccess, signUpFail, signInSuccess, signInFail } =
+    authSlice.actions;
 
 export default authSlice.reducer;

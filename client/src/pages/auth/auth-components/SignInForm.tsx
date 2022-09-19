@@ -16,6 +16,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { SignInSchema } from "../../../validations/AuthValidations";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
+import { SignInCrt } from "../../../redux/reducers/authReducers/authSlice";
 
 type FormValue = {
     email: string;
@@ -23,6 +25,8 @@ type FormValue = {
 };
 
 const SignInForm = () => {
+    const errorState = useAppSelector((state) => state.authReucer.error);
+    const dispatch = useAppDispatch();
     const [showPass, setShowPass] = useState<boolean>(false);
     const {
         register,
@@ -36,8 +40,8 @@ const SignInForm = () => {
     };
 
     const submitSignIn = handleSubmit((data) => {
-        console.log(data);
         reset();
+        dispatch(SignInCrt(data));
     });
 
     return (
@@ -48,6 +52,17 @@ const SignInForm = () => {
                 maxWidth: "100%",
             }}
         >
+            {errorState ? (
+                <Typography
+                    variant="caption"
+                    color="error"
+                    sx={{ paddingTop: "10px" }}
+                >
+                    {errorState}
+                </Typography>
+            ) : (
+                <></>
+            )}
             <TextField
                 {...register("email")}
                 label="Email"
