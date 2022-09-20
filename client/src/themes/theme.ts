@@ -32,6 +32,9 @@ export const themeDark = createTheme({
         bgImgAuth: {
             main: "black",
         },
+        text: {
+            primary: grey[300],
+        },
     },
 });
 
