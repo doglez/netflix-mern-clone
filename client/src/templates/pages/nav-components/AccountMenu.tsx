@@ -13,8 +13,11 @@ import {
     Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useAppDispatch } from "../../../hooks/redux-hooks";
+import { SignOutCrt } from "../../../redux/reducers/authReducers/authSlice";
 
 const AccountMenu = () => {
+    const dispatch = useAppDispatch();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -91,7 +94,13 @@ const AccountMenu = () => {
                     <HelpOutline sx={{ marginRight: "12px" }} /> Help Center
                 </MenuItem>
                 <Divider />
-                <MenuItem>Sign out to Dogflix</MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        dispatch(SignOutCrt());
+                    }}
+                >
+                    Sign out to Dogflix
+                </MenuItem>
             </Menu>
         </>
     );

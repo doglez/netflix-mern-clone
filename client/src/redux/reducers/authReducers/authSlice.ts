@@ -101,6 +101,18 @@ const authSlice = createSlice({
             state.status = "";
             state.data = "";
         },
+        signOutSuccess: (state, action) => {
+            state.token = "";
+            state.error = "";
+            state.status = "";
+            state.data = "";
+        },
+        signOutFail: (state, action) => {
+            state.token = "";
+            state.error = action.payload.error;
+            state.status = "";
+            state.data = "";
+        },
         forgotPasswordSuccess: (state, action) => {
             state.token = "";
             state.error = "";
@@ -145,6 +157,7 @@ export const SignUpCrt =
             .post(`${API_URL_SERVER}/auth/signup`, data)
             .then((r) => {
                 dispatch(signUpSuccess(r.data));
+                window.location.reload();
             })
             .catch((e) => dispatch(signUpFail(e.response.data)));
     };
@@ -156,9 +169,23 @@ export const SignInCrt =
             .post(`${API_URL_SERVER}/auth/signin`, data)
             .then((r) => {
                 dispatch(signInSuccess(r.data));
+                window.location.reload();
             })
             .catch((e) => dispatch(signInFail(e.response.data)));
     };
+
+export const SignOutCrt = (): any => async (dispatch: any) => {
+    await axios
+        .get(`${API_URL_SERVER}/auth/signout`)
+        .then((r) => {
+            dispatch(signOutSuccess(r.data));
+            localStorage.removeItem("RIXefsVzPCZXUxVlHaxuyOqZ");
+        })
+        .catch((e) => {
+            dispatch(signOutFail(e.response.data));
+            localStorage.removeItem("RIXefsVzPCZXUxVlHaxuyOqZ");
+        });
+};
 
 export const forgotPasswordCrt =
     (data: any): any =>
@@ -190,6 +217,8 @@ export const {
     signUpFail,
     signInSuccess,
     signInFail,
+    signOutSuccess,
+    signOutFail,
     forgotPasswordSuccess,
     forgotPasswordFail,
     resetPasswordSuccess,
