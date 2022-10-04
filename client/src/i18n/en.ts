@@ -15,3 +15,21 @@ export const FooterTexts: string[] = [
     "Legal Notices",
     "Only on Netflix",
 ];
+
+export const MenuPagesAdults: string[] = [
+    "Home",
+    "TV Shows",
+    "Movies",
+    "New & Popular",
+    "My List",
+    "Browse by Languages",
+];
+
+export const MenuLinksPagesAdults: string[] = [
+    "/browse",
+    "/browse/genre/83",
+    "/browse/genre/34399",
+    "/latest",
+    "/browse/my-list",
+    "/search",
+];

@@ -75,6 +75,7 @@ app.use(
     })
 );
 
+app.use(express.static("public"));
 app.use("/api/v1", Routes);
 
 app.use(ErrorHandler);

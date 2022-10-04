@@ -3,11 +3,15 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Auth from "./pages/auth/Auth";
 import SignIn from "./pages/auth/auth-components/SignIn";
 import LandingPage from "./pages/auth/auth-components/LandingPage";
-import Home from "./pages/home/Home";
 import SignUp from "./pages/auth/auth-components/SignUp";
 import ForgotPassword from "./pages/auth/auth-components/ForgotPassword";
 import ResetPassword from "./pages/auth/auth-components/ResetPassword";
 import { useAppSelector } from "./hooks/redux-hooks";
+import Browse from "./pages/browse/Browse";
+import Kids from "./pages/kids/Kids";
+import ProfilesManage from "./pages/profilesManage/ProfilesManage";
+import HomeBrowse from "./pages/browse/browse-components/HomeBrowse";
+import HomeKids from "./pages/kids/kids-components/HomeKids";
 
 function App() {
     const token: string = useAppSelector((state) => state.authReucer.token);
@@ -42,13 +46,10 @@ function App() {
                             element={<Navigate to="/browse" replace />}
                         />
                         <Route path="/">
-                            <Route path="browse" element={<Home />}>
-                                <Route index element={<LandingPage />} />
+                            <Route path="browse" element={<Browse />}>
+                                <Route index element={<HomeBrowse />} />
                                 <Route path="genre">
-                                    <Route
-                                        path="83"
-                                        element={<LandingPage />}
-                                    />
+                                    <Route path="83" element={<HomeBrowse />} />
                                     <Route
                                         path="34399"
                                         element={<LandingPage />}
@@ -63,10 +64,10 @@ function App() {
                                     element={<LandingPage />}
                                 />
                             </Route>
-                            <Route path="latest" element={<Home />} />
-                            <Route path="search" element={<Home />} />
-                            <Route path="Kids" element={<Home />}>
-                                <Route index element={<LandingPage />} />
+                            <Route path="latest" element={<Browse />} />
+                            <Route path="search" element={<Browse />} />
+                            <Route path="Kids" element={<Kids />}>
+                                <Route index element={<HomeKids />} />
                                 <Route
                                     path="characters"
                                     element={<LandingPage />}
@@ -89,10 +90,13 @@ function App() {
                                     path="original-audio"
                                     element={<LandingPage />}
                                 />
-                                <Route path="latest" element={<Home />} />
-                                <Route path="search" element={<Home />} />
+                                <Route path="latest" element={<Kids />} />
+                                <Route path="search" element={<Kids />} />
                             </Route>
-                            <Route path="profiles/manage" element={<Home />} />
+                            <Route
+                                path="profiles/manage"
+                                element={<ProfilesManage />}
+                            />
                         </Route>
                         <Route
                             path="*"

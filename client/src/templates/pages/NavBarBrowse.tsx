@@ -1,12 +1,6 @@
-import {
-    ArrowDropDown,
-    Notifications,
-    SearchRounded,
-} from "@mui/icons-material";
+import { SearchRounded } from "@mui/icons-material";
 import {
     AppBar,
-    Avatar,
-    Badge,
     InputBase,
     Link,
     MenuList,
@@ -18,6 +12,8 @@ import { alpha } from "@mui/system";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { MenuLinksPagesAdults, MenuPagesAdults } from "../../i18n/en";
+import AccountMenu from "./nav-components/AccountMenu";
+import NotificationsBadge from "./nav-components/NotificationsBadge";
 
 const pages = MenuPagesAdults;
 const linksPages = MenuLinksPagesAdults;
@@ -139,23 +135,8 @@ const NavBarBrowse = () => {
                     >
                         Kids
                     </StyledLink>
-                    <Badge
-                        badgeContent={3}
-                        color="error"
-                        sx={{ margin: "0 20px" }}
-                    >
-                        <Notifications />
-                    </Badge>
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            marginLeft: "10px",
-                        }}
-                    >
-                        <Avatar variant="rounded">Foto</Avatar>
-                        <ArrowDropDown />
-                    </div>
+                    <NotificationsBadge />
+                    <AccountMenu />
                 </div>
             </StyledToolbar>
         </AppBar>
