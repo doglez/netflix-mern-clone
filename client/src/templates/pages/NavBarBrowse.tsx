@@ -12,6 +12,7 @@ import { alpha } from "@mui/system";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { MenuLinksPagesAdults, MenuPagesAdults } from "../../i18n/en";
+import { HiddenDown } from "../../ui-components/BoxContainer&Content";
 import AccountMenu from "./nav-components/AccountMenu";
 import NotificationsBadge from "./nav-components/NotificationsBadge";
 
@@ -26,10 +27,9 @@ const LogoText = styled(Typography)(({ theme }) => ({
 }));
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-    width: "100%",
-    margin: "auto",
     [theme.breakpoints.up("sm")]: {
         width: "93%",
+        margin: "auto",
     },
 }));
 
@@ -40,12 +40,12 @@ const StyledLink: any = styled(Link)(({ theme }) => ({
     },
 }));
 
-const MenuListResponsive = styled(MenuList)(({ theme }) => ({
+const MenuListLarge = styled(MenuList)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-between",
     marginLeft: "10px",
     [theme.breakpoints.down("lg")]: {
-        display: "block",
+        display: "none",
     },
 }));
 
@@ -96,7 +96,7 @@ const NavBarBrowse = () => {
         <AppBar position="static" component="nav">
             <StyledToolbar>
                 <LogoText variant="h3">Dogflix</LogoText>
-                <MenuListResponsive>
+                <MenuListLarge>
                     {pages.map((page, item) => (
                         <li key={page} style={{ marginLeft: "20px" }}>
                             <StyledLink
@@ -109,13 +109,13 @@ const NavBarBrowse = () => {
                             </StyledLink>
                         </li>
                     ))}
-                </MenuListResponsive>
+                </MenuListLarge>
                 <div
                     style={{
                         display: "flex",
-                        right: "20px",
                         alignItems: "center",
-                        position: "absolute",
+                        position: "relative",
+                        marginLeft: "auto",
                     }}
                 >
                     <SearchDiv>
@@ -124,19 +124,23 @@ const NavBarBrowse = () => {
                         </SearchIconWrapper>
                         <SytledInputBase placeholder="Titles, peolpe, genres" />
                     </SearchDiv>
-                    <StyledLink
-                        component={RouterLink}
-                        to="/kids"
-                        color="text.primary"
-                        underline="none"
-                        sx={{
-                            marginLeft: "15px",
-                        }}
-                    >
-                        Kids
-                    </StyledLink>
-                    <NotificationsBadge />
-                    <AccountMenu />
+                    <HiddenDown size="md">
+                        <StyledLink
+                            component={RouterLink}
+                            to="/kids"
+                            color="text.primary"
+                            underline="none"
+                            sx={{
+                                marginLeft: "15px",
+                            }}
+                        >
+                            Kids
+                        </StyledLink>
+                        <NotificationsBadge />
+                    </HiddenDown>
+                    <HiddenDown size="sm">
+                        <AccountMenu />
+                    </HiddenDown>
                 </div>
             </StyledToolbar>
         </AppBar>
