@@ -29,7 +29,7 @@ export const MenuLinksPagesAdults: string[] = [
     "/browse",
     "/browse/genre/83",
     "/browse/genre/34399",
-    "/latest",
+    "/browse/latest",
     "/browse/my-list",
-    "/search",
+    "/browse/original-audio",
 ];

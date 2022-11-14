@@ -12,6 +12,11 @@ import Kids from "./pages/kids/Kids";
 import ProfilesManage from "./pages/profilesManage/ProfilesManage";
 import HomeBrowse from "./pages/browse/browse-components/HomeBrowse";
 import HomeKids from "./pages/kids/kids-components/HomeKids";
+import TvShowsBrowse from "./pages/browse/browse-components/TvShowsBrowse";
+import MoviesBrowse from "./pages/browse/browse-components/MoviesBrowse";
+import NewPopularBrowse from "./pages/browse/browse-components/NewPopularBrowse";
+import MyListBrowse from "./pages/browse/browse-components/MyListBrowse";
+import BrowseByLanguagesBrowse from "./pages/browse/browse-components/BrowseByLanguagesBrowse";
 
 function App() {
     const token: string = useAppSelector((state) => state.authReucer.token);
@@ -49,22 +54,28 @@ function App() {
                             <Route path="browse" element={<Browse />}>
                                 <Route index element={<HomeBrowse />} />
                                 <Route path="genre">
-                                    <Route path="83" element={<HomeBrowse />} />
+                                    <Route
+                                        path="83"
+                                        element={<TvShowsBrowse />}
+                                    />
                                     <Route
                                         path="34399"
-                                        element={<LandingPage />}
+                                        element={<MoviesBrowse />}
                                     />
                                 </Route>
                                 <Route
                                     path="my-list"
-                                    element={<LandingPage />}
+                                    element={<MyListBrowse />}
                                 />
                                 <Route
                                     path="original-audio"
-                                    element={<LandingPage />}
+                                    element={<BrowseByLanguagesBrowse />}
+                                />
+                                <Route
+                                    path="latest"
+                                    element={<NewPopularBrowse />}
                                 />
                             </Route>
-                            <Route path="latest" element={<Browse />} />
                             <Route path="search" element={<Browse />} />
                             <Route path="Kids" element={<Kids />}>
                                 <Route index element={<HomeKids />} />
