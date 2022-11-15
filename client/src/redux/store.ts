@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import authSlice from "./reducers/authReducers/authSlice";
+import trendingSlice from "./reducers/tmdbReducers/trendingSlice";
 
 const store = configureStore({
     reducer: {
         authReucer: authSlice,
+        trendingReducer: trendingSlice,
     },
     middleware: [thunk],
 });
