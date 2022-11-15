@@ -4,17 +4,17 @@ import jwtDecode from "jwt-decode";
 import { API_URL_SERVER } from "../../../config/Config";
 
 interface IInitialState {
-    token: string;
-    error: string;
-    status: string;
-    data: object | string;
+    token: string | null;
+    error: string | null;
+    status: string | null;
+    data: object | string | null;
 }
 
 const initialState: IInitialState = {
-    token: "",
-    error: "",
-    status: "",
-    data: "",
+    token: null,
+    error: null,
+    status: null,
+    data: null,
 };
 
 interface IDocodeToken {
@@ -42,7 +42,7 @@ const getInitialState = () => {
                 return initialState;
             });
 
-            return { token, error: "", status: "", data: "" };
+            return { token, error: null, status: null, data: null };
         }
 
         localStorage.removeItem("RIXefsVzPCZXUxVlHaxuyOqZ");
@@ -69,15 +69,15 @@ const authSlice = createSlice({
             ] = `Bearer ${action.payload.token}`;
 
             state.token = action.payload.token;
-            state.error = "";
-            state.status = "";
-            state.data = "";
+            state.error = null;
+            state.status = null;
+            state.data = null;
         },
         signUpFail: (state, action) => {
-            state.token = "";
+            state.token = null;
             state.error = action.payload.error;
-            state.status = "";
-            state.data = "";
+            state.status = null;
+            state.data = null;
         },
         signInSuccess: (state, action) => {
             // The token is stored in local storage under the name RIXefsVzPCZXUxVlHaxuyOqZ
@@ -91,39 +91,39 @@ const authSlice = createSlice({
             ] = `Bearer ${action.payload.token}`;
 
             state.token = action.payload.token;
-            state.error = "";
-            state.status = "";
-            state.data = "";
+            state.error = null;
+            state.status = null;
+            state.data = null;
         },
         signInFail: (state, action) => {
-            state.token = "";
+            state.token = null;
             state.error = action.payload.error;
-            state.status = "";
-            state.data = "";
+            state.status = null;
+            state.data = null;
         },
         signOutSuccess: (state, action) => {
-            state.token = "";
-            state.error = "";
-            state.status = "";
-            state.data = "";
+            state.token = null;
+            state.error = null;
+            state.status = null;
+            state.data = null;
         },
         signOutFail: (state, action) => {
-            state.token = "";
+            state.token = null;
             state.error = action.payload.error;
-            state.status = "";
-            state.data = "";
+            state.status = null;
+            state.data = null;
         },
         forgotPasswordSuccess: (state, action) => {
-            state.token = "";
-            state.error = "";
-            state.status = "";
+            state.token = null;
+            state.error = null;
+            state.status = null;
             state.data = action.payload.data;
         },
         forgotPasswordFail: (state, action) => {
-            state.token = "";
+            state.token = null;
             state.error = action.payload.error;
-            state.status = "";
-            state.data = "";
+            state.status = null;
+            state.data = null;
         },
         resetPasswordSuccess: (state, action) => {
             // The token is stored in local storage under the name RIXefsVzPCZXUxVlHaxuyOqZ
@@ -137,15 +137,15 @@ const authSlice = createSlice({
             ] = `Bearer ${action.payload.token}`;
 
             state.token = action.payload.token;
-            state.error = "";
-            state.status = "";
+            state.error = null;
+            state.status = null;
             state.data = action.payload.data;
         },
         resetPasswordFail: (state, action) => {
-            state.token = "";
+            state.token = null;
             state.error = action.payload.error;
-            state.status = "";
-            state.data = "";
+            state.status = null;
+            state.data = null;
         },
     },
 });
