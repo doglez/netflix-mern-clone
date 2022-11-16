@@ -1,9 +1,10 @@
-import { Box, Button, Stack, styled, Typography } from "@mui/material";
-import React, { FC } from "react";
+import { Box, Button, Popper, Stack, styled, Typography } from "@mui/material";
+import React, { FC, MouseEvent, useState } from "react";
 import { IMovies } from "../interfaces/Interfaces";
 import { BgHomeBox } from "../ui-components/bgHome";
 import "../assets/css/LandingProgram.css";
 import { InfoOutlined, PlayArrow } from "@mui/icons-material";
+import DetailesProgram from "./DetailesProgram";
 
 interface ILandingProgram {
     program: IMovies;
@@ -26,6 +27,15 @@ const BoxContent = styled(Box)(({ theme }) => ({
 }));
 
 const LandingProgram: FC<ILandingProgram> = ({ program }) => {
+    const [popper, setPopper] = useState<null | HTMLElement>(null);
+
+    const handlePopper = (e: MouseEvent<HTMLElement>) => {
+        setPopper(popper ? null : e.currentTarget);
+    };
+
+    const open = Boolean(popper);
+    const id = open ? "simple-popper" : undefined;
+
     return (
         <BgHomeBox backdropPath={program?.backdrop_path}>
             <BoxContent>
@@ -58,9 +68,18 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                             width: "140px",
                             height: "40px",
                         }}
+                        aria-describedby={id}
+                        type="button"
+                        onClick={handlePopper}
                     >
                         <InfoOutlined /> More Info
                     </Button>
+                    <Popper id={id} open={open} anchorEl={popper}>
+                        <DetailesProgram
+                            programId={program.id}
+                            handlePopper={handlePopper}
+                        />
+                    </Popper>
                 </Stack>
             </BoxContent>
         </BgHomeBox>
