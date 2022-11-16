@@ -6,6 +6,7 @@ const Browse = () => {
     return (
         <>
             <NavBarBrowse />
+            <div style={{ paddingTop: "60px" }} />
             <Outlet />
         </>
     );
