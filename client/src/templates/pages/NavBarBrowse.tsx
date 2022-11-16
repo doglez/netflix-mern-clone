@@ -93,7 +93,7 @@ const SytledInputBase = styled(InputBase)(({ theme }) => ({
 
 const NavBarBrowse = () => {
     return (
-        <AppBar position="static" component="nav">
+        <AppBar component="nav">
             <StyledToolbar>
                 <LogoText variant="h3">Dogflix</LogoText>
                 <MenuListLarge>
