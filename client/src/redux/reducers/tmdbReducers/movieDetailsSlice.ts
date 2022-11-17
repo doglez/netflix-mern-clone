@@ -34,11 +34,16 @@ const initialState: IMovieDetails = {
     status_message: null,
 };
 
+interface action {
+    payload: IMovieDetails;
+    type: string;
+}
+
 const movieDetailsSlice = createSlice({
     name: "movieDetailsReducer",
     initialState,
     reducers: {
-        getMovieDetailsSuccess: (state, action) => {
+        getMovieDetailsSuccess: (state, action: action) => {
             state.adult = action.payload.adult;
             state.backdrop_path = action.payload.backdrop_path;
             state.belongs_to_collection = action.payload.belongs_to_collection;
@@ -105,12 +110,9 @@ export const getMovieDetails =
     (params: number): any =>
     async (dispatch: any) => {
         await axios
-            .get(`${TMDB_URL}/movie/505642?api_key=${TOKEN_TMDB}`)
-            .then((r) => console.log(r))
-            .catch((e) => {
-                dispatch(getMovieDetailsFail(e.response.data));
-                console.error(e);
-            });
+            .get(`${TMDB_URL}/movie/${params}?api_key=${TOKEN_TMDB}`)
+            .then((r) => dispatch(getMovieDetailsSuccess(r.data)))
+            .catch((e) => dispatch(getMovieDetailsFail(e.response.data)));
     };
 
 export const { getMovieDetailsSuccess, getMovieDetailsFail } =
