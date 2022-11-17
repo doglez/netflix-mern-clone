@@ -1,13 +1,13 @@
 import { Box, Button, Popper, Stack, styled, Typography } from "@mui/material";
 import React, { FC, MouseEvent, useState } from "react";
-import { IMovies } from "../interfaces/Interfaces";
+import { ITrending } from "../interfaces/Interfaces";
 import { BgHomeBox } from "../ui-components/bgHome";
 import "../assets/css/LandingProgram.css";
 import { InfoOutlined, PlayArrow } from "@mui/icons-material";
-import DetailesProgram from "./DetailesProgram";
+import MovieDescription from "./MovieDescription";
 
 interface ILandingProgram {
-    program: IMovies;
+    program: ITrending;
 }
 
 const BoxContent = styled(Box)(({ theme }) => ({
@@ -40,7 +40,7 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
         <BgHomeBox backdropPath={program?.backdrop_path}>
             <BoxContent>
                 <Typography variant="h4" gutterBottom>
-                    {program?.title}
+                    {program?.title || program?.name}
                 </Typography>
                 <Typography
                     variant="subtitle2"
@@ -75,10 +75,14 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                         <InfoOutlined /> More Info
                     </Button>
                     <Popper id={id} open={open} anchorEl={popper}>
-                        <DetailesProgram
-                            program={program}
-                            handlePopper={handlePopper}
-                        />
+                        {program.media_type === "movie" ? (
+                            <MovieDescription
+                                movieID={program.id}
+                                handlePopper={handlePopper}
+                            />
+                        ) : (
+                            <></>
+                        )}
                     </Popper>
                 </Stack>
             </BoxContent>

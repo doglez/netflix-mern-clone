@@ -1,4 +1,4 @@
-export interface IMovies {
+export interface ITrending {
     adult: boolean;
     backdrop_path: string;
     id: number;
@@ -14,6 +14,10 @@ export interface IMovies {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    name: string;
+    original_name: string;
+    first_air_date: Date;
+    origin_country: string[];
 }
 
 export interface IMovieDetails {
