@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Dispatch } from "react";
 import { TMDB_URL, TOKEN_TMDB } from "../../../config/Config";
 import { ITvDetails } from "../../../interfaces/Interfaces";
 
