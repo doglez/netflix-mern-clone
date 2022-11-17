@@ -76,7 +76,7 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                     </Button>
                     <Popper id={id} open={open} anchorEl={popper}>
                         <DetailesProgram
-                            programId={program.id}
+                            program={program}
                             handlePopper={handlePopper}
                         />
                     </Popper>
