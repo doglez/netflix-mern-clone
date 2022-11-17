@@ -5,6 +5,7 @@ import { BgHomeBox } from "../ui-components/bgHome";
 import "../assets/css/LandingProgram.css";
 import { InfoOutlined, PlayArrow } from "@mui/icons-material";
 import MovieDescription from "./MovieDescription";
+import TvDescription from "./TvDescription";
 
 interface ILandingProgram {
     program: ITrending;
@@ -81,7 +82,10 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                                 handlePopper={handlePopper}
                             />
                         ) : (
-                            <></>
+                            <TvDescription
+                                tvID={program.id}
+                                handlePopper={handlePopper}
+                            />
                         )}
                     </Popper>
                 </Stack>
