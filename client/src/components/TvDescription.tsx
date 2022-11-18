@@ -3,7 +3,6 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { FC, MouseEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { getTvDetails } from "../redux/reducers/tmdbReducers/tvDetailsSlice";
-import { BgHomeBox } from "../ui-components/bgHome";
 import LoadingPage from "./LoadingPage";
 
 interface ITvDescription {
@@ -22,22 +21,20 @@ const TvDescription: FC<ITvDescription> = ({ tvID, handlePopper }) => {
     return (
         <Box
             sx={{
+                width: "70%",
                 backgroundColor: "black",
+                position: "fixed",
             }}
         >
             {!tv.backdrop_path ? (
                 <LoadingPage />
             ) : (
-                <BgHomeBox backdropPath={tv?.backdrop_path}>
+                <>
                     <Box>
                         <Typography variant="h4" gutterBottom>
                             {tv?.name}
                         </Typography>
-                        <Typography
-                            variant="subtitle2"
-                            gutterBottom
-                            className="truncate-overflow"
-                        >
+                        <Typography variant="subtitle2" gutterBottom>
                             {tv?.overview}
                         </Typography>
 
@@ -54,7 +51,7 @@ const TvDescription: FC<ITvDescription> = ({ tvID, handlePopper }) => {
                             <PlayArrow /> Play
                         </Button>
                     </Box>
-                </BgHomeBox>
+                </>
             )}
         </Box>
     );

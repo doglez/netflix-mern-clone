@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { TMDB_URL, TOKEN_TMDB } from "../../../config/Config";
-import { ITvDetails } from "../../../interfaces/Interfaces";
+import { ITvDetails } from "../../../interfaces/InterfacesReducers";
 
 const initialState: ITvDetails = {
     adult: null,

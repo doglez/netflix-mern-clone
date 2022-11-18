@@ -1,6 +1,6 @@
-import { Box, Button, Popper, Stack, styled, Typography } from "@mui/material";
+import { Box, Button, Stack, styled, Typography } from "@mui/material";
 import React, { FC, MouseEvent, useState } from "react";
-import { ITrending } from "../interfaces/Interfaces";
+import { ITrending } from "../interfaces/InterfacesReducers";
 import { BgHomeBox } from "../ui-components/bgHome";
 import "../assets/css/LandingProgram.css";
 import { InfoOutlined, PlayArrow } from "@mui/icons-material";
@@ -28,14 +28,11 @@ const BoxContent = styled(Box)(({ theme }) => ({
 }));
 
 const LandingProgram: FC<ILandingProgram> = ({ program }) => {
-    const [popper, setPopper] = useState<null | HTMLElement>(null);
+    const [popperOpen, setPopperOpen] = useState<boolean>(false);
 
     const handlePopper = (e: MouseEvent<HTMLElement>) => {
-        setPopper(popper ? null : e.currentTarget);
+        setPopperOpen(!popperOpen);
     };
-
-    const open = Boolean(popper);
-    const id = open ? "simple-popper" : undefined;
 
     return (
         <BgHomeBox backdropPath={program?.backdrop_path}>
@@ -69,27 +66,28 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                             width: "140px",
                             height: "40px",
                         }}
-                        aria-describedby={id}
                         type="button"
                         onClick={handlePopper}
                     >
                         <InfoOutlined /> More Info
                     </Button>
-                    <Popper id={id} open={open} anchorEl={popper}>
-                        {program.media_type === "movie" ? (
-                            <MovieDescription
-                                movieID={program.id}
-                                handlePopper={handlePopper}
-                            />
-                        ) : (
-                            <TvDescription
-                                tvID={program.id}
-                                handlePopper={handlePopper}
-                            />
-                        )}
-                    </Popper>
                 </Stack>
             </BoxContent>
+            <div
+                style={!popperOpen ? { display: "none" } : { display: "block" }}
+            >
+                {program.media_type === "movie" ? (
+                    <MovieDescription
+                        movieID={program.id}
+                        handlePopper={handlePopper}
+                    />
+                ) : (
+                    <TvDescription
+                        tvID={program.id}
+                        handlePopper={handlePopper}
+                    />
+                )}
+            </div>
         </BgHomeBox>
     );
 };
