@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import authSlice from "./reducers/authReducers/authSlice";
+import movieCastSlice from "./reducers/tmdbReducers/movieCastSlice";
 import movieDetailsSlice from "./reducers/tmdbReducers/movieDetailsSlice";
 import trendingSlice from "./reducers/tmdbReducers/trendingSlice";
 import tvDetailsSlice from "./reducers/tmdbReducers/tvDetailsSlice";
@@ -10,6 +11,7 @@ const store = configureStore({
         authReucer: authSlice,
         trendingReducer: trendingSlice,
         movieDetailsReducer: movieDetailsSlice,
+        movieCastReducer: movieCastSlice,
         tvDetailsReducer: tvDetailsSlice,
     },
     middleware: [thunk],
