@@ -64,7 +64,7 @@ const MovieDescription: FC<IMovieDescription> = ({ movieID }) => {
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
-                maxWidth={false}
+                maxWidth={"md"}
                 scroll="body"
             >
                 {!movie.backdrop_path ? (
