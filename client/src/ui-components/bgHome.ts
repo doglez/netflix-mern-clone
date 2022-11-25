@@ -8,16 +8,11 @@ export const BgHomeBox: any = styled(Box)(() => (props: any) => ({
     height: "90vh",
 }));
 
-// export const BgDescriptions: any = styled(Box)(() => (props: any) => ({
-//     width: "100%",
-//     color: "white",
-//     background: `url(${IMG_TMDB}/${props.backdropPath}) no-repeat top center`,
-//     backgroundSize: "cover",
-//     position: "absolute",
-//     top: "-360px",
-//     left: "20%",
-//     // transform: "traslate(-50%, -25%)",
-// }));
+export const BgDescriptions: any = styled(Box)(() => (props: any) => ({
+    color: "white",
+    background: `url(${IMG_TMDB}/${props.backdropPath}) no-repeat top center`,
+    backgroundSize: "cover",
+}));
 
 export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -27,3 +22,22 @@ export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         padding: theme.spacing(1),
     },
 }));
+
+export const BoxContentDescription = styled(Box)(
+    ({ theme }) =>
+        (props?: any) => ({
+            color: "white",
+            paddingTop: "200px",
+            marginLeft: "30px",
+            width: props.width || "25%",
+            [theme.breakpoints.down("md")]: {
+                width: "50%",
+                paddingTop: "200px",
+            },
+            [theme.breakpoints.down("sm")]: {
+                marginLeft: "5px",
+                width: "100%",
+                paddingTop: "200px",
+            },
+        })
+);
