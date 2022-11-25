@@ -1,15 +1,12 @@
 import { InfoOutlined, PlayArrow } from "@mui/icons-material";
-import { Button, DialogContent, Typography } from "@mui/material";
+import { Box, Button, DialogContent, Grid, Typography } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
+import { getMovieCast } from "../redux/reducers/tmdbReducers/movieCastSlice";
 import { getMovieDetails } from "../redux/reducers/tmdbReducers/movieDetailsSlice";
-import {
-    BootstrapDialog,
-    BoxContentDescription,
-} from "../ui-components/bgHome";
+import { BootstrapDialog } from "../ui-components/bgHome";
 import BootstrapDialogTitle from "./BootstrapDialogTitle";
 import LoadingPage from "./LoadingPage";
-// import LoadingPage from "./LoadingPage";
 
 interface IMovieDescription {
     movieID: number;
@@ -18,10 +15,27 @@ interface IMovieDescription {
 const MovieDescription: FC<IMovieDescription> = ({ movieID }) => {
     const dispatch = useAppDispatch();
     const movie = useAppSelector((state) => state.movieDetailsReducer);
+    const credits = useAppSelector((state) => state.movieCastReducer);
+    const cast = credits.cast;
+    const genres = movie.genres;
+    const companies = movie.production_companies;
+
+    let runTimeH: number | null = null;
+    let runTimeM: number | null = null;
+    let textRunTime: string | null = null;
+
+    if (movie?.runtime !== null) {
+        runTimeH = Math.round(movie?.runtime / 60);
+        runTimeM = movie?.runtime - runTimeH * 60;
+        textRunTime = `${runTimeH}h${runTimeM}m`;
+    } else if (movie?.runtime !== null && movie?.runtime <= 60) {
+        textRunTime = `${movie?.runtime}m`;
+    }
 
     useEffect(() => {
         dispatch(getMovieDetails(movieID));
-    }, [dispatch, movieID]);
+        dispatch(getMovieCast(movieID));
+    }, [dispatch, movie?.runtime, movieID]);
 
     const [open, setOpen] = useState(false);
 
@@ -62,8 +76,12 @@ const MovieDescription: FC<IMovieDescription> = ({ movieID }) => {
                             onClose={handleClose}
                             backdropPath={movie.backdrop_path}
                         >
-                            <BoxContentDescription width={"45%"}>
-                                <Typography variant="h4" gutterBottom>
+                            <Box sx={{ padding: "250px 20px 20px" }}>
+                                <Typography
+                                    variant="h2"
+                                    gutterBottom
+                                    sx={{ fontWeight: "bold" }}
+                                >
                                     {movie?.title}
                                 </Typography>
                                 <Button
@@ -78,32 +96,131 @@ const MovieDescription: FC<IMovieDescription> = ({ movieID }) => {
                                 >
                                     <PlayArrow /> Play
                                 </Button>
-                                <Typography variant="subtitle2" gutterBottom>
-                                    {movie?.overview}
-                                </Typography>
-                            </BoxContentDescription>
+                            </Box>
                         </BootstrapDialogTitle>
                         <DialogContent
                             dividers
                             sx={{ backgroundColor: "black" }}
                         >
-                            <Typography gutterBottom>
-                                Cras mattis consectetur purus sit amet
-                                fermentum. Cras justo odio, dapibus ac facilisis
-                                in, egestas eget quam. Morbi leo risus, porta ac
-                                consectetur ac, vestibulum at eros.
-                            </Typography>
-                            <Typography gutterBottom>
-                                Praesent commodo cursus magna, vel scelerisque
-                                nisl consectetur et. Vivamus sagittis lacus vel
-                                augue laoreet rutrum faucibus dolor auctor.
-                            </Typography>
-                            <Typography gutterBottom>
-                                Aenean lacinia bibendum nulla sed consectetur.
-                                Praesent commodo cursus magna, vel scelerisque
-                                nisl consectetur et. Donec sed odio dui. Donec
-                                ullamcorper nulla non metus auctor fringilla.
-                            </Typography>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} md={8}>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            flexDirection: "row",
+                                            width: "70%",
+                                            paddingTop: "16px",
+                                        }}
+                                    >
+                                        <Typography
+                                            variant="subtitle2"
+                                            gutterBottom
+                                            pr={1}
+                                            color="green"
+                                        >
+                                            {movie?.vote_average === null
+                                                ? ""
+                                                : Math.round(
+                                                      movie?.vote_average * 10
+                                                  )}
+                                            {"% "}User Score
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitle2"
+                                            gutterBottom
+                                            pr={1}
+                                        >
+                                            {movie?.release_date === null
+                                                ? ""
+                                                : String(
+                                                      new Date(
+                                                          movie?.release_date
+                                                      ).getFullYear()
+                                                  )}
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitle2"
+                                            gutterBottom
+                                        >
+                                            {textRunTime === null
+                                                ? ""
+                                                : textRunTime}
+                                        </Typography>
+                                    </div>
+                                    <Typography variant="h5" gutterBottom>
+                                        {movie?.tagline}
+                                    </Typography>
+                                    <Typography
+                                        variant="subtitle2"
+                                        gutterBottom
+                                    >
+                                        {movie?.overview}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} md={4}>
+                                    <span
+                                        style={{
+                                            fontSize: "0.9rem",
+                                            color: "#9e9e9e",
+                                            paddingTop: "16px",
+                                        }}
+                                    >
+                                        Cast:{" "}
+                                    </span>
+                                    {cast?.slice(0, 10).map((people) => (
+                                        <span
+                                            key={people.id}
+                                            style={{
+                                                fontSize: "0.9rem",
+                                            }}
+                                        >
+                                            {people.name},{" "}
+                                        </span>
+                                    ))}
+                                    <br />
+                                    <br />
+                                    <span
+                                        style={{
+                                            fontSize: "0.9rem",
+                                            color: "#9e9e9e",
+                                            paddingTop: "16px",
+                                        }}
+                                    >
+                                        Genres:{" "}
+                                    </span>
+                                    {genres?.slice(0, 10).map((genre) => (
+                                        <span
+                                            key={genre.id}
+                                            style={{
+                                                fontSize: "0.9rem",
+                                            }}
+                                        >
+                                            {genre.name},{" "}
+                                        </span>
+                                    ))}
+                                    <br />
+                                    <br />
+                                    <span
+                                        style={{
+                                            fontSize: "0.9rem",
+                                            color: "#9e9e9e",
+                                            paddingTop: "16px",
+                                        }}
+                                    >
+                                        Companies:{" "}
+                                    </span>
+                                    {companies?.slice(0, 10).map((companie) => (
+                                        <span
+                                            key={companie.id}
+                                            style={{
+                                                fontSize: "0.9rem",
+                                            }}
+                                        >
+                                            {companie.name},{" "}
+                                        </span>
+                                    ))}
+                                </Grid>
+                            </Grid>
                         </DialogContent>
                     </>
                 )}

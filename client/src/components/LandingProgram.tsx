@@ -1,11 +1,11 @@
 import { Button, Stack, Typography } from "@mui/material";
 import React, { FC } from "react";
-import { ITrending } from "../interfaces/InterfacesReducers";
 import { BgHomeBox, BoxContentDescription } from "../ui-components/bgHome";
 import "../assets/css/LandingProgram.css";
 import { PlayArrow } from "@mui/icons-material";
 import TvDescription from "./TvDescription";
 import MovieDescription from "./MovieDescription";
+import { ITrending } from "../interfaces/InterfacesTrending";
 
 interface ILandingProgram {
     program: ITrending;
@@ -15,7 +15,11 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
     return (
         <BgHomeBox backdropPath={program?.backdrop_path}>
             <BoxContentDescription>
-                <Typography variant="h4" gutterBottom>
+                <Typography
+                    variant="h2"
+                    gutterBottom
+                    sx={{ fontWeight: "bold" }}
+                >
                     {program?.title || program?.name}
                 </Typography>
                 <Typography
