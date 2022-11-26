@@ -1,8 +1,8 @@
 import { Button, Stack, Typography } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { BgHomeBox, BoxContentDescription } from "../ui-components/bgHome";
 import "../assets/css/LandingProgram.css";
-import { PlayArrow } from "@mui/icons-material";
+import { InfoOutlined, PlayArrow } from "@mui/icons-material";
 import TvDescription from "./TvDescription";
 import MovieDescription from "./MovieDescription";
 import { ITrending } from "../interfaces/InterfacesTrending";
@@ -12,6 +12,12 @@ interface ILandingProgram {
 }
 
 const LandingProgram: FC<ILandingProgram> = ({ program }) => {
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
     return (
         <BgHomeBox backdropPath={program?.backdrop_path}>
             <BoxContentDescription width={"50%"}>
@@ -42,8 +48,24 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                     >
                         <PlayArrow /> Play
                     </Button>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            width: "140px",
+                            height: "40px",
+                        }}
+                        type="button"
+                        onClick={handleClickOpen}
+                    >
+                        <InfoOutlined />
+                        More Info
+                    </Button>
                     {program.media_type === "movie" ? (
-                        <MovieDescription movieID={program.id} />
+                        <MovieDescription
+                            movieID={program.id}
+                            open={open}
+                            setOpen={setOpen}
+                        />
                     ) : (
                         <TvDescription tvID={program.id} />
                     )}
