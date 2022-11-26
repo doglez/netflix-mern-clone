@@ -14,9 +14,9 @@ interface ILandingProgram {
 const LandingProgram: FC<ILandingProgram> = ({ program }) => {
     return (
         <BgHomeBox backdropPath={program?.backdrop_path}>
-            <BoxContentDescription>
+            <BoxContentDescription width={"50%"}>
                 <Typography
-                    variant="h2"
+                    variant={"h3"}
                     gutterBottom
                     sx={{ fontWeight: "bold" }}
                 >

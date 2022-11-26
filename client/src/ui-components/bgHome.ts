@@ -31,7 +31,7 @@ export const BoxContentDescription = styled(Box)(
             marginLeft: "30px",
             width: props.width || "25%",
             [theme.breakpoints.down("md")]: {
-                width: "50%",
+                width: "75%",
                 paddingTop: "200px",
             },
             [theme.breakpoints.down("sm")]: {
