@@ -14,15 +14,11 @@ const ProgramCardList = () => {
         dispatch(getTendrings());
     }, [dispatch]);
 
-    const loading = false;
-
     return (
         <Grid container wrap="nowrap">
-            {(loading ? Array.from(new Array(3)) : programs).map(
-                (program: ITrending) => (
-                    <ProgramCard program={program} key={program.id} />
-                )
-            )}
+            {programs.map((program: ITrending) => (
+                <ProgramCard program={program} key={program.id} />
+            ))}
         </Grid>
     );
 };
