@@ -2,7 +2,7 @@ import { PlayArrow } from "@mui/icons-material";
 import { Box, Button, DialogContent, Grid, Typography } from "@mui/material";
 import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import { getMovieCast } from "../redux/reducers/tmdbReducers/movieCastSlice";
+import { getCast } from "../redux/reducers/tmdbReducers/CastSlice";
 import { setMovieDetailsNull } from "../redux/reducers/tmdbReducers/movieDetailsSlice";
 import { BootstrapDialog } from "../ui-components/bgHome";
 import { timeToTextCalculation } from "../utilities/Calculations";
@@ -16,14 +16,14 @@ interface IMovieDescription {
 const MovieDescription: FC<IMovieDescription> = ({ open, setOpen }) => {
     const dispatch = useAppDispatch();
     const movie = useAppSelector((state) => state.movieDetailsReducer);
-    const credits = useAppSelector((state) => state.movieCastReducer);
+    const credits = useAppSelector((state) => state.CastReducer);
     const cast = credits.cast;
     const genres = movie.genres;
     const companies = movie.production_companies;
 
     useEffect(() => {
         if (movie.id !== null) {
-            dispatch(getMovieCast(movie?.id));
+            dispatch(getCast(movie?.id, "movie"));
         }
     }, [dispatch, movie.id]);
 

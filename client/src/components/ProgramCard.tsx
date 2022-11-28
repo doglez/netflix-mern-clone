@@ -4,6 +4,7 @@ import { IMG_TMDB } from "../config/Config";
 import { useAppDispatch } from "../hooks/redux-hooks";
 import { ITrending } from "../interfaces/InterfacesTrending";
 import { getMovieDetails } from "../redux/reducers/tmdbReducers/movieDetailsSlice";
+import { getTvDetails } from "../redux/reducers/tmdbReducers/tvDetailsSlice";
 import MovieDescription from "./MovieDescription";
 import TvDescription from "./TvDescription";
 
@@ -19,6 +20,8 @@ const ProgramCard: FC<IProgramCard> = ({ program }) => {
         setOpen(true);
         if (program.media_type === "movie") {
             dispatch(getMovieDetails(program.id));
+        } else if (program.media_type === "tv") {
+            dispatch(getTvDetails(program.id));
         }
     };
 
@@ -48,7 +51,7 @@ const ProgramCard: FC<IProgramCard> = ({ program }) => {
                     {program.media_type === "movie" ? (
                         <MovieDescription open={open} setOpen={setOpen} />
                     ) : (
-                        <TvDescription tvID={program.id} />
+                        <TvDescription open={open} setOpen={setOpen} />
                     )}
                 </>
             ) : (

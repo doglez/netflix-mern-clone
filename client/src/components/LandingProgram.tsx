@@ -8,6 +8,7 @@ import MovieDescription from "./MovieDescription";
 import { ITrending } from "../interfaces/InterfacesTrending";
 import { useAppDispatch } from "../hooks/redux-hooks";
 import { getMovieDetails } from "../redux/reducers/tmdbReducers/movieDetailsSlice";
+import { getTvDetails } from "../redux/reducers/tmdbReducers/tvDetailsSlice";
 
 interface ILandingProgram {
     program: ITrending;
@@ -21,6 +22,8 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
         setOpen(true);
         if (program.media_type === "movie") {
             dispatch(getMovieDetails(program.id));
+        } else if (program.media_type === "tv") {
+            dispatch(getTvDetails(program.id));
         }
     };
 
@@ -69,7 +72,7 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                     {program.media_type === "movie" ? (
                         <MovieDescription open={open} setOpen={setOpen} />
                     ) : (
-                        <TvDescription tvID={program.id} />
+                        <TvDescription open={open} setOpen={setOpen} />
                     )}
                 </Stack>
             </BoxContentDescription>
