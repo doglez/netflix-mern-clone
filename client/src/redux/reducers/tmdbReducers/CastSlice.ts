@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { TMDB_URL, TOKEN_TMDB } from "../../../config/Config";
-import { IMovieCast } from "../../../interfaces/InterfacesMovie";
+import { ICast } from "../../../interfaces/InterfaceCast";
 
-const initialState: IMovieCast = {
+const initialState: ICast = {
     id: null,
     cast: null,
     success: null,
@@ -12,22 +12,22 @@ const initialState: IMovieCast = {
 };
 
 interface action {
-    payload: IMovieCast;
+    payload: ICast;
     type: string;
 }
 
-const movieCastSlice = createSlice({
-    name: "movieCastReducer",
+const CastSlice = createSlice({
+    name: "CastReducer",
     initialState,
     reducers: {
-        getMovieCastSuccess: (state, action: action) => {
+        getCastSuccess: (state, action: action) => {
             state.id = action.payload.id;
             state.cast = action.payload.cast;
             state.success = null;
             state.status_code = null;
             state.status_message = null;
         },
-        getMovieCastFail: (state, action: action) => {
+        getCastFail: (state, action: action) => {
             state.id = null;
             state.cast = null;
             state.success = action.payload.success;
@@ -37,15 +37,15 @@ const movieCastSlice = createSlice({
     },
 });
 
-export const getMovieCast =
-    (params: number): any =>
+export const getCast =
+    (id: number, mediaType: string): any =>
     async (dispatch: any) => {
         await axios
-            .get(`${TMDB_URL}/movie/${params}/credits?api_key=${TOKEN_TMDB}`)
-            .then((r) => dispatch(getMovieCastSuccess(r.data)))
-            .catch((e) => dispatch(getMovieCastFail(e.response.data)));
+            .get(`${TMDB_URL}/${mediaType}/${id}/credits?api_key=${TOKEN_TMDB}`)
+            .then((r) => dispatch(getCastSuccess(r.data)))
+            .catch((e) => dispatch(getCastFail(e.response.data)));
     };
 
-export const { getMovieCastSuccess, getMovieCastFail } = movieCastSlice.actions;
+export const { getCastSuccess, getCastFail } = CastSlice.actions;
 
-export default movieCastSlice.reducer;
+export default CastSlice.reducer;
