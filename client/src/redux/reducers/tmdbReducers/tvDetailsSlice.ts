@@ -124,6 +124,43 @@ const tvDetailsSlice = createSlice({
             state.status_code = action.payload.status_code;
             state.status_message = action.payload.status_message;
         },
+        clearTvDetails: (state) => {
+            state.adult = null;
+            state.backdrop_path = null;
+            state.created_by = null;
+            state.episode_run_time = null;
+            state.first_air_date = null;
+            state.genres = null;
+            state.homepage = null;
+            state.id = null;
+            state.in_production = null;
+            state.languages = null;
+            state.last_air_date = null;
+            state.last_episode_to_air = null;
+            state.name = null;
+            state.next_episode_to_air = null;
+            state.networks = null;
+            state.number_of_episodes = null;
+            state.number_of_seasons = null;
+            state.origin_country = null;
+            state.original_language = null;
+            state.original_name = null;
+            state.overview = null;
+            state.popularity = null;
+            state.poster_path = null;
+            state.production_companies = null;
+            state.production_countries = null;
+            state.seasons = null;
+            state.spoken_languages = null;
+            state.status = null;
+            state.tagline = null;
+            state.type = null;
+            state.vote_average = null;
+            state.vote_count = null;
+            state.success = null;
+            state.status_code = null;
+            state.status_message = null;
+        },
     },
 });
 
@@ -136,6 +173,11 @@ export const getTvDetails =
             .catch((e) => dispatch(getTvDetailsFail(e.response.data)));
     };
 
-export const { getTvDetailsSuccess, getTvDetailsFail } = tvDetailsSlice.actions;
+export const setTvDetailsNull = (): any => (dispatch: any) => {
+    dispatch(clearTvDetails());
+};
+
+export const { getTvDetailsSuccess, getTvDetailsFail, clearTvDetails } =
+    tvDetailsSlice.actions;
 
 export default tvDetailsSlice.reducer;
