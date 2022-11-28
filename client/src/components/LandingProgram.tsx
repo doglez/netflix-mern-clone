@@ -6,6 +6,8 @@ import { InfoOutlined, PlayArrow } from "@mui/icons-material";
 import TvDescription from "./TvDescription";
 import MovieDescription from "./MovieDescription";
 import { ITrending } from "../interfaces/InterfacesTrending";
+import { useAppDispatch } from "../hooks/redux-hooks";
+import { getMovieDetails } from "../redux/reducers/tmdbReducers/movieDetailsSlice";
 
 interface ILandingProgram {
     program: ITrending;
@@ -13,9 +15,13 @@ interface ILandingProgram {
 
 const LandingProgram: FC<ILandingProgram> = ({ program }) => {
     const [open, setOpen] = useState(false);
+    const dispatch = useAppDispatch();
 
     const handleClickOpen = () => {
         setOpen(true);
+        if (program.media_type === "movie") {
+            dispatch(getMovieDetails(program.id));
+        }
     };
 
     return (
@@ -61,11 +67,7 @@ const LandingProgram: FC<ILandingProgram> = ({ program }) => {
                         More Info
                     </Button>
                     {program.media_type === "movie" ? (
-                        <MovieDescription
-                            movieID={program.id}
-                            open={open}
-                            setOpen={setOpen}
-                        />
+                        <MovieDescription open={open} setOpen={setOpen} />
                     ) : (
                         <TvDescription tvID={program.id} />
                     )}

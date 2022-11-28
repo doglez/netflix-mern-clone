@@ -3,22 +3,17 @@ import { Box, Button, DialogContent, Grid, Typography } from "@mui/material";
 import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { getMovieCast } from "../redux/reducers/tmdbReducers/movieCastSlice";
-import { getMovieDetails } from "../redux/reducers/tmdbReducers/movieDetailsSlice";
+import { setMovieDetailsNull } from "../redux/reducers/tmdbReducers/movieDetailsSlice";
 import { BootstrapDialog } from "../ui-components/bgHome";
 import { timeToTextCalculation } from "../utilities/Calculations";
 import BootstrapDialogTitle from "./BootstrapDialogTitle";
 
 interface IMovieDescription {
-    movieID: number;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MovieDescription: FC<IMovieDescription> = ({
-    movieID,
-    open,
-    setOpen,
-}) => {
+const MovieDescription: FC<IMovieDescription> = ({ open, setOpen }) => {
     const dispatch = useAppDispatch();
     const movie = useAppSelector((state) => state.movieDetailsReducer);
     const credits = useAppSelector((state) => state.movieCastReducer);
@@ -27,15 +22,19 @@ const MovieDescription: FC<IMovieDescription> = ({
     const companies = movie.production_companies;
 
     useEffect(() => {
-        dispatch(getMovieDetails(movieID));
-        dispatch(getMovieCast(movieID));
-    }, [dispatch, movie?.runtime, movieID]);
+        if (movie.id !== null) {
+            dispatch(getMovieCast(movie?.id));
+        }
+    }, [dispatch, movie.id]);
 
     const handleClose = () => {
         setOpen(false);
+        dispatch(setMovieDetailsNull());
     };
 
-    return (
+    return movie.backdrop_path === null ? (
+        <></>
+    ) : (
         <BootstrapDialog
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"

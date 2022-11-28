@@ -103,6 +103,36 @@ const movieDetailsSlice = createSlice({
             state.status_code = action.payload.status_code;
             state.status_message = action.payload.status_message;
         },
+        clearMovieDetails: (state) => {
+            state.adult = null;
+            state.backdrop_path = null;
+            state.belongs_to_collection = null;
+            state.budget = null;
+            state.genres = null;
+            state.homepage = null;
+            state.id = null;
+            state.imdb_id = null;
+            state.original_language = null;
+            state.original_title = null;
+            state.overview = null;
+            state.popularity = null;
+            state.poster_path = null;
+            state.production_companies = null;
+            state.production_countries = null;
+            state.release_date = null;
+            state.revenue = null;
+            state.runtime = null;
+            state.spoken_languages = null;
+            state.status = null;
+            state.tagline = null;
+            state.title = null;
+            state.video = null;
+            state.vote_average = null;
+            state.vote_count = null;
+            state.success = null;
+            state.status_code = null;
+            state.status_message = null;
+        },
     },
 });
 
@@ -115,7 +145,14 @@ export const getMovieDetails =
             .catch((e) => dispatch(getMovieDetailsFail(e.response.data)));
     };
 
-export const { getMovieDetailsSuccess, getMovieDetailsFail } =
-    movieDetailsSlice.actions;
+export const setMovieDetailsNull = (): any => (dispatch: any) => {
+    dispatch(clearMovieDetails());
+};
+
+export const {
+    getMovieDetailsSuccess,
+    getMovieDetailsFail,
+    clearMovieDetails,
+} = movieDetailsSlice.actions;
 
 export default movieDetailsSlice.reducer;
