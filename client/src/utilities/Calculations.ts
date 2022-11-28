@@ -15,7 +15,7 @@ export const timeToTextCalculation = (runtime: number | null) => {
         } else if (runtime === 60) {
             textRunTime = `1h`;
         } else {
-            runTimeH = Math.round(runtime / 60);
+            runTimeH = Math.floor(runtime / 60);
             runTimeM = runtime - runTimeH * 60;
             textRunTime = `${runTimeH}h${runTimeM}m`;
         }
