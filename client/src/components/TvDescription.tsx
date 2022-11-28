@@ -100,6 +100,18 @@ const TvDescription: FC<ITvDescription> = ({ open, setOpen }) => {
                                           ).getFullYear()
                                       )}
                             </Typography>
+                            <Typography variant="subtitle2" gutterBottom pr={1}>
+                                {tv?.number_of_seasons}{" "}
+                                {tv?.number_of_seasons === 1
+                                    ? "season"
+                                    : "seasons"}
+                            </Typography>
+                            <Typography variant="subtitle2" gutterBottom pr={1}>
+                                {tv?.number_of_episodes}{" "}
+                                {tv?.number_of_episodes === 1
+                                    ? "episode"
+                                    : "episodes"}
+                            </Typography>
                         </div>
                         <Typography variant="h5" gutterBottom>
                             {tv?.tagline}
