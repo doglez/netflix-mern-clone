@@ -8,8 +8,9 @@
     },
     "scripts": {
         "dev": "ts-node-dev src/index",
-        "build": "rm -rf build & tsc",
-        "start": "SET NODE_ENV=production & node build/index"
+        "build": "rm -rf build & tsc & npm run copy-files",
+        "start": "SET NODE_ENV=production & node build/index",
+        "copy-files": "cp -r ./src/public/ ./build/"
     },
     "keywords": [],
     "author": "",
