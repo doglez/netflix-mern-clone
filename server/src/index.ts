@@ -74,15 +74,14 @@ app.use(
         optionsSuccessStatus: 200,
     })
 );
-
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use("/api/v1", Routes);
 
 app.use(ErrorHandler);
 
 const server = app.listen(PORT, () => {
     console.log(
-        `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
+        `Server running in ${NODE_ENV} mode on port http://localhost:${PORT}`
             .yellow.bold
     );
 });
