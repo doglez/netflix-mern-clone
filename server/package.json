@@ -8,7 +8,7 @@
     },
     "scripts": {
         "dev": "ts-node-dev src/index",
-        "build": " tsc",
+        "build": "rm -rf build & tsc",
         "start": "SET NODE_ENV=production & node build/index"
     },
     "keywords": [],
