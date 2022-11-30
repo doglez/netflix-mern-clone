@@ -67,7 +67,15 @@ app.use(limmiter);
 app.use(hpp());
 
 // Enable CORS
-app.use(cors());
+app.use(
+    cors({
+        origin: CORS_ADMIT_URL,
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
+    })
+);
 
 app.use(express.static(__dirname + "/public"));
 app.use("/api/v1", Routes);
