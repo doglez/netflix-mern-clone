@@ -69,10 +69,8 @@ app.use(hpp());
 // Enable CORS
 app.use(
     cors({
-        origin: CORS_ADMIT_URL,
-        allowedHeaders: ["Content-Type", "Authorization"],
+        origin: "*",
         credentials: true,
-        preflightContinue: false,
         optionsSuccessStatus: 204,
     })
 );
