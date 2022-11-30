@@ -154,9 +154,7 @@ export const SignUpCrt =
     (data: any): any =>
     async (dispatch: any) => {
         await axios
-            .post(`${API_URL_SERVER}/auth/signup`, data, {
-                headers: { "Access-Control-Allow-Origin": "*" },
-            })
+            .post(`${API_URL_SERVER}/auth/signup`, data)
             .then((r) => {
                 dispatch(signUpSuccess(r.data));
                 window.location.reload();
