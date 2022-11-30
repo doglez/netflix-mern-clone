@@ -71,7 +71,6 @@ app.use(
     cors({
         origin: CORS_ADMIT_URL,
         credentials: true,
-        allowedHeaders: ["Access-Control-Allow-Origin", "*"],
         optionsSuccessStatus: 200,
     })
 );
