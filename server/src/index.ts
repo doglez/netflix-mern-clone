@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import express, { Express } from "express";
 import morgan from "morgan";
 import {
-    // CORS_ADMIT_URL,
+    CORS_ADMIT_URL,
     MAX_FILE_UPLOAD,
     NODE_ENV,
     PORT,
@@ -14,7 +14,7 @@ import ExpressMongoSanitize from "express-mongo-sanitize";
 import helmet from "helmet";
 import rateLimit, { RateLimitRequestHandler } from "express-rate-limit";
 import hpp from "hpp";
-// import cors from "cors";
+import cors from "cors";
 import ErrorHandler from "./middleware/ErrorHandler";
 import Routes from "./routes/Routes";
 
@@ -67,23 +67,13 @@ app.use(limmiter);
 app.use(hpp());
 
 // Enable CORS
-// app.use(
-//     cors({
-//         origin: CORS_ADMIT_URL,
-//         credentials: true,
-//         optionsSuccessStatus: 200,
-//     })
-// );
-
-app.use(function (_req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Methods",
-        "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    );
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    next();
-});
+app.use(
+    cors({
+        origin: CORS_ADMIT_URL,
+        credentials: true,
+        optionsSuccessStatus: 200,
+    })
+);
 
 app.use(express.static(__dirname + "/public"));
 app.use("/api/v1", Routes);
