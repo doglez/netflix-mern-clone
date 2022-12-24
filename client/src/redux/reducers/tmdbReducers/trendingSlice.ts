@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { TMDB_URL, TOKEN_TMDB } from "../../../config/Config";
+import { consoleErr } from "../../../debugger/debugger";
 
 interface IInitialState {
     page: number | null;
@@ -47,7 +48,7 @@ export const getTendrings = (): any => async (dispatch: any) => {
         })
         .catch((e) => {
             dispatch(getTendringsFail(e.response.data));
-            console.error(e);
+            consoleErr(e);
         });
 };
 
