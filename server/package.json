@@ -2,14 +2,14 @@
     "name": "server",
     "version": "1.0.0",
     "description": "",
-    "main": "dist/index.js",
+    "main": "index.js",
     "engines": {
         "node": ">=18.12.1"
     },
     "scripts": {
         "dev": "ts-node-dev src/index",
-        "build": "rm -rf build & tsc & npm run copy-files",
-        "start": "SET NODE_ENV=production & node build/index",
+        "build": "tsc",
+        "start": "node build/index.js",
         "copy-files": "cp -r ./src/public/ ./build/"
     },
     "keywords": [],

@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  dogflix-api:
+    image: dogflix-api
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - dogflix-app
+  
+networks:
+  dogflix-app:
+    driver: bridge
+
+# To deploy in local
+# docker-compose -f docker-compose.yml up
