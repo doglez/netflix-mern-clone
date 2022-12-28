@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./.env" });
 
+export const HOST_NAME: string = String(process.env.HOST_NAME);
 export const NODE_ENV: string = String(process.env.NODE_ENV);
 export const PORT: number = Number(process.env.PORT);
 export const CORS_ADMIT_URL: string = String(process.env.CORS_ADMIT_URL);

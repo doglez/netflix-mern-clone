@@ -24,3 +24,7 @@ yarn-error.log*
 dev.env
 prod.env
 .env
+
+# Certificates
+*.crt
+*.key

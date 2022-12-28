@@ -1,9 +1,11 @@
 import colors from "colors";
 import cookieParser from "cookie-parser";
 import express, { Express } from "express";
+import https from "https";
 import morgan from "morgan";
 import {
     CORS_ADMIT_URL,
+    HOST_NAME,
     MAX_FILE_UPLOAD,
     NODE_ENV,
     PORT,
@@ -17,6 +19,7 @@ import hpp from "hpp";
 import cors from "cors";
 import ErrorHandler from "./middleware/ErrorHandler";
 import Routes from "./routes/Routes";
+import CertificateOptions from "./certificate/CertificateOptions";
 
 colors.enable();
 
@@ -80,11 +83,18 @@ app.use("/api/v1", Routes);
 
 app.use(ErrorHandler);
 
-const server = app.listen(PORT, () => {
-    console.log(
-        `Server running in ${NODE_ENV} mode on port http://localhost:${PORT}`
-            .yellow.bold
-    );
+const server = https.createServer(CertificateOptions, app).listen(PORT, () => {
+    if (NODE_ENV === "production") {
+        console.log(
+            `Server running in ${NODE_ENV} mode on port ${HOST_NAME}`.yellow
+                .bold
+        );
+    } else {
+        console.log(
+            `Server running in ${NODE_ENV} mode on port ${HOST_NAME}:${PORT}`
+                .yellow.bold
+        );
+    }
 });
 
 // Handle unhandle promise rejection

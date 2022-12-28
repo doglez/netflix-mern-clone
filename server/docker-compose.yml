@@ -4,7 +4,7 @@ services:
     image: dogflix-api
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "443:443"
     networks:
       - dogflix-app
   
