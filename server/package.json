@@ -10,7 +10,7 @@
         "dev": "ts-node-dev src/index",
         "build": "tsc",
         "start": "node build/index.js",
-        "copy-files": "cp -r ./src/public/ ./build/"
+        "copy-files": "cp -r ./src/public/ ./build/ & cp ./src/certificate/*.crt ./build/certificate & cp ./src/certificate/*.key ./build/certificate"
     },
     "keywords": [],
     "author": "",
