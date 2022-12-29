@@ -5,7 +5,6 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package*.json ./
-COPY tsconfig*.son ./
 
 RUN npm install
 
@@ -14,6 +13,8 @@ COPY . .
 
 RUN npm run build
 RUN npm run copy-files
+
+RUN rm -rf ./src tsconfig*.json .dockerignore Dockerfile package-lock.json
 
 CMD [ "npm","start" ]
 
