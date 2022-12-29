@@ -157,7 +157,7 @@ export const SignUpCrt =
             .post(`${API_URL_SERVER}/auth/signup`, data)
             .then((r) => {
                 dispatch(signUpSuccess(r.data));
-                // window.location.reload();
+                window.location.reload();
             })
             .catch((e) => dispatch(signUpFail(e.response.data)));
     };
@@ -169,7 +169,7 @@ export const SignInCrt =
             .post(`${API_URL_SERVER}/auth/signin`, data)
             .then((r) => {
                 dispatch(signInSuccess(r.data));
-                // window.location.reload();
+                window.location.reload();
             })
             .catch((e) => dispatch(signInFail(e.response.data)));
     };
