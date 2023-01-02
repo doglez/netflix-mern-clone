@@ -24,18 +24,54 @@ describe("<LandingPageForm /> test", () => {
     });
 
     it("Should have a <form> with <label> 'Email address'", () => {
-        expect(screen.getByLabelText("Email address")).toBeInTheDocument();
+        expect(
+            screen.getByRole("textbox", { name: "Email address" })
+        ).toBeInTheDocument();
     });
 
     it("Should have a <form> with <button>", () => {
-        expect(screen.getByTestId("button-to-signup")).toBeInTheDocument();
+        expect(
+            screen.getByRole("button", { name: "Get Started" })
+        ).toBeInTheDocument();
     });
 
-    it("Should show a message 'Email is required!' if <input> email is empty", () => {
-        const email = screen.getByTestId("email-to-signup") as HTMLInputElement;
-        const submit = screen.getByTestId("button-to-signup");
+    it("Should show a message 'Email is required!' if <input> email is empty", async () => {
+        const emailInput = screen.getByRole("textbox", {
+            name: "Email address",
+        });
 
-        fireEvent.change(email, { target: { value: "" } });
-        expect(submit).toBeInTheDocument();
+        const submitButton = screen.getByRole("button", {
+            name: "Get Started",
+        });
+
+        fireEvent.change(emailInput, { target: { value: "" } });
+
+        fireEvent.click(submitButton);
+
+        const errorMessage = await screen.findByText(/Email is required!/i);
+
+        expect(errorMessage).toHaveTextContent(/Email is required!/i);
+    });
+
+    it("Should show a message 'Please enter a valid email address' if <input> email is not a email format", async () => {
+        const emailInput = screen.getByRole("textbox", {
+            name: "Email address",
+        });
+
+        const submitButton = screen.getByRole("button", {
+            name: "Get Started",
+        });
+
+        fireEvent.change(emailInput, { target: { value: "abc" } });
+
+        fireEvent.click(submitButton);
+
+        const errorMessage = await screen.findByText(
+            /Please enter a valid email address/i
+        );
+
+        expect(errorMessage).toHaveTextContent(
+            /Please enter a valid email address/i
+        );
     });
 });

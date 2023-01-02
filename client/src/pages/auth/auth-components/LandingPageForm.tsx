@@ -83,7 +83,6 @@ const LandingPageForm = () => {
                                 paddingLeft: "5px",
                                 backgroundColor: "white",
                             }}
-                            inputProps={{ "data-testid": "email-to-signup" }}
                         />
                     </ThemeProvider>
                     <Button
@@ -91,7 +90,6 @@ const LandingPageForm = () => {
                         color="secondary"
                         type="submit"
                         sx={{ width: "45%" }}
-                        data-testid="button-to-signup"
                     >
                         Get Started{<ChevronRightSharp />}
                     </Button>

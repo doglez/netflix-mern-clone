@@ -60,7 +60,7 @@ const NavBarAuth = () => {
                                 component={RouterLink}
                                 to="/signin"
                             >
-                                Sing In
+                                Sign In
                             </Button>
                         </>
                     ) : null}
